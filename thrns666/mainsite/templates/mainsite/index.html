@@ -1,0 +1,13 @@
+{% extends 'mainsite/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<ul>
+    {% for i in categories %}
+    <li><h3>{{ i.title }}</h3>
+        <p>{{ i.description }}</p>
+    </li>
+    {% endfor %}
+</ul>
+<!--<p> Содержимое главной страницы сайта</p>-->
+{% endblock content %}
