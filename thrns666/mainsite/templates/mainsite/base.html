@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    <link type="text/css" href="{% static 'mainsite/css/style.css' %}" rel="stylesheet"/>
 </head>
 <body>
 {% block head_menu %}
