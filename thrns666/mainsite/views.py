@@ -10,7 +10,7 @@ menu = ['Главная страница', 'Каталог', 'Доставка',
 # Create your views here.
 def index(request):
     db_returns = ShopTable.objects.all()
-    return render(request, 'mainsite/index.html', {'title': 'Главная страница', 'head_menu': menu, 'categories': db_returns, 'font_awesome+token': font_awesome_token})
+    return render(request, 'mainsite/index.html', {'title': 'Главная страница', 'head_menu': menu, 'categories': db_returns, 'font_awesome_token': font_awesome_token})
 
 def about(request):
     return render(request, 'mainsite/about.html', {'title': 'О данном сайте', 'main_menu': menu})
