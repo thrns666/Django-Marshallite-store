@@ -82,3 +82,8 @@ a:hover {
 .footer a, .footer li {
     color: #c8c8c8;
 }
+
+.modal-body img {
+    max-width: 50px;
+}
+

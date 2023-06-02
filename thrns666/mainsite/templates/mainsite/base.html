@@ -39,7 +39,37 @@
             <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cart-modal">
+                <i class="fa-solid fa-basket-shopping"></i>
+            </a>
+            <div class="modal fade" id="cart-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Корзина</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table">
+                      <tbody>
+                        <tr>
+                          <td><img src="static/mainsite/img/wood.jpg" alt=""></td>
+                            <td><a href="#">Щит мебельный березовый склеенный<br>шлифованный 22 мм 22х100х1000</a></td>
+                          <td>1 шт.</td>
+                            <td>
+                                11.79 р.
+                            </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="button" class="btn btn-primary">Оформить заказа</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#"  data-bs-toggle="dropdown"><i class="fa-regular fa-user"></i></a>
@@ -52,6 +82,7 @@
     </div>
   </div>
 </nav>
+
 {% endblock head_menu %}
 
 {% block content%}
