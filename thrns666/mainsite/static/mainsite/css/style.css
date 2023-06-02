@@ -29,11 +29,11 @@ section {
 
 
 a {
-    color: #7e7e7e;
+    color: #00000;
 }
 
 a:hover {
-    color: #000000;
+    color: #7e7e7e;
 }
 
 
