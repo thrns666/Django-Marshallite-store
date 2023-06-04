@@ -87,3 +87,17 @@ a:hover {
     max-width: 50px;
 }
 
+/* Carousel */
+
+.my-carousel {
+    padding: 0;
+}
+
+.my-carousel .carousel-item {
+    display: flex;
+    max-height: 500px;
+}
+
+.my-carousel .carousel-item img {
+    object-fit: cover;
+}
