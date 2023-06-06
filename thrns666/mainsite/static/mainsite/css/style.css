@@ -29,7 +29,7 @@ section {
 
 
 a {
-    color: #00000;
+    color: #000;
 }
 
 a:hover {
@@ -97,7 +97,12 @@ a:hover {
     max-height: 650px;
 }
 
+.carousel-item h5 {
+   font-family: 'Montserrat', sans-serif;
 
-.my-carousel .carousel-item img {
-    object-fit: cover;
+}
+
+.carousel-item a {
+    color: #fff;
+    text-decoration: none;
 }
