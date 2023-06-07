@@ -63,9 +63,10 @@ a:hover {
 }
 
 .footer {
+    font-family: 'Montserrat', sans-serif;
     background-color: #343434;
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     border-bottom: 1px solid #666;
     padding-bottom: 3px;
 }
@@ -131,6 +132,7 @@ a:hover {
 }
 
 .product-details {
+    font-family: 'Nunito Sans', sans-serif;
     padding: 20px;
 }
 
