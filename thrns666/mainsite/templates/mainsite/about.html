@@ -1,6 +1,81 @@
 {% extends 'mainsite/base.html' %}
 
 {% block content %}
-<h1>{{ title }}</h1>
-<p> Содержимое страницы o сайте</p>
+<!--<div id='cssmenu'>-->
+<!--<ul>-->
+<!--  <li><a href='#'>Home</a></li>-->
+<!--    <li class='active'><a href='#'>Products</a>-->
+<!--	<ul>-->
+<!--	  <li><a href='#'>Product 1</a>-->
+<!--	    <ul>-->
+<!--		<li><a href='#'>Sub Product</a></li>-->
+<!--		<li><a href='#'>Sub Product</a>-->
+<!--		  <ul>-->
+<!--		    <li><a href='#'>Sub Product</a></li>-->
+<!--			<li><a href='#'>Sub Product</a></li>-->
+<!--			<li><a href='#'>Sub Product</a></li>-->
+<!--		  </ul>-->
+<!--		</li>-->
+<!--	      <li><a href='#'>Sub Product</a></li>-->
+<!--	      <li><a href='#'>Sub Product</a></li>-->
+<!--	      <li><a href='#'>Sub Product</a></li>-->
+<!--	      <li><a href='#'>Sub Product</a></li>-->
+<!--              <li><a href='#'>Sub Product</a></li>-->
+<!--	  </ul>-->
+<!--	</li>-->
+<!--	<li><a href='#'>Product 2</a>-->
+<!--	  <ul>-->
+<!--	     <li><a href='#'>Sub Product</a></li>-->
+<!--	     <li><a href='#'>Sub Product</a></li>-->
+<!--          </ul>-->
+<!--	</li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<!--  <li><a href='#'>About</a></li>-->
+<!--  <li><a href='#'>Contact</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+
+
+
+<ul class="tree">
+  <li><a href="">Home</a></li>
+  <li><span>Category</span>
+    <ul>
+      <li><a href="#">jQuery</a>
+        <ul>
+          <li><a href="#">jQuery</a></li>
+          <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/jQuery UI/">jQuery UI</a></a></li>
+          <li><a href="#">jQuery Mobile</a></li>
+        </ul>
+      </li>
+      <li><a href="#">JavaScript</a>
+        <ul>
+          <li><a class="active" href="#">AngularJS</a></li>
+          <li><a href="#">React</a></li>
+          <li><a href="#">Backbone</a></li>
+        </ul>
+      </li>
+      <li><a href="#suits">Golang</a></li>
+    </ul>
+  </li>
+  <li><a href="#about">About</a>
+    <ul>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Jobs</a>
+        <ul>
+          <li><a href="#jobs1">Job 1</a></li>
+          <li><a href="#jobs2">Job 2</a></li>
+          <li><a href="#jobs3">Job 3</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="jquery.treemenu.js"></script>
+
 {% endblock content %}
