@@ -38,44 +38,97 @@
 
 
 
-<ul class="tree">
-  <li><a href="">Home</a></li>
-  <li><span>Category</span>
-    <ul>
-      <li><a href="#">jQuery</a>
-        <ul>
-          <li><a href="#">jQuery</a></li>
-          <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/jQuery UI/">jQuery UI</a></a></li>
-          <li><a href="#">jQuery Mobile</a></li>
-        </ul>
-      </li>
-      <li><a href="#">JavaScript</a>
-        <ul>
-          <li><a class="active" href="#">AngularJS</a></li>
-          <li><a href="#">React</a></li>
-          <li><a href="#">Backbone</a></li>
-        </ul>
-      </li>
-      <li><a href="#suits">Golang</a></li>
-    </ul>
+<!--<ul class="tree">-->
+<!--  <li><a href="">Home</a></li>-->
+<!--  <li><span>Category</span>-->
+<!--    <ul>-->
+<!--      <li><a href="#">jQuery</a>-->
+<!--        <ul>-->
+<!--          <li><a href="#">jQuery</a></li>-->
+<!--          <li><a href="#"><a href="https://www.jqueryscript.net/tags.php?/jQuery UI/">jQuery UI</a></a></li>-->
+<!--          <li><a href="#">jQuery Mobile</a></li>-->
+<!--        </ul>-->
+<!--      </li>-->
+<!--      <li><a href="#">JavaScript</a>-->
+<!--        <ul>-->
+<!--          <li><a class="active" href="#">AngularJS</a></li>-->
+<!--          <li><a href="#">React</a></li>-->
+<!--          <li><a href="#">Backbone</a></li>-->
+<!--        </ul>-->
+<!--      </li>-->
+<!--      <li><a href="#suits">Golang</a></li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<!--  <li><a href="#about">About</a>-->
+<!--    <ul>-->
+<!--      <li><a href="#">Contact</a></li>-->
+<!--      <li><a href="#">Blog</a></li>-->
+<!--      <li><a href="#">Jobs</a>-->
+<!--        <ul>-->
+<!--          <li><a href="#jobs1">Job 1</a></li>-->
+<!--          <li><a href="#jobs2">Job 2</a></li>-->
+<!--          <li><a href="#jobs3">Job 3</a></li>-->
+<!--        </ul>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </li>-->
+<!--</ul>-->
+
+
+<!--<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>-->
+<!--<script src="jquery.treemenu.js"></script>-->
+
+<ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
+  <li>
+    <details open>
+      <summary>Инструмент</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Режущий</summary>
+            <ul>
+              <li>Пилы</li>
+              <li>Бензопилы</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Ледяные</summary>
+            <ul>
+              <li>Уран</li>
+              <li>Нептун</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
   </li>
-  <li><a href="#about">About</a>
-    <ul>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Blog</a></li>
-      <li><a href="#">Jobs</a>
-        <ul>
-          <li><a href="#jobs1">Job 1</a></li>
-          <li><a href="#jobs2">Job 2</a></li>
-          <li><a href="#jobs3">Job 3</a></li>
-        </ul>
-      </li>
-    </ul>
+  <li>
+    <details open>
+      <summary>Планеты гиганты</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Газовые</summary>
+            <ul>
+              <li>Юпитер</li>
+              <li>Сатурн</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Ледяные</summary>
+            <ul>
+              <li>Уран</li>
+              <li>Нептун</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
   </li>
 </ul>
-
-
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="jquery.treemenu.js"></script>
 
 {% endblock content %}

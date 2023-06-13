@@ -176,11 +176,229 @@ a:hover {
     margin-left: 10px;
 }
 
+/*xhtml tree list*/
 
+:root{
+
+  --width      : 36;
+
+  --rounding   : 4px;
+
+  --accent     : #696;
+
+  --dark-grey  : #ddd;
+
+  --grey       : #eee;
+
+  --light-grey : #f8f8f8;
+
+}
+
+*, ::before, ::after {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+}
+
+html {
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-weight: 300;
+
+    font-size: clamp(16px, 100vw / var(--width), 20px);
+
+    font-feature-settings: 'onum','pnum';
+
+    line-height: 1.8;
+
+    -webkit-text-size-adjust: none;
+
+    text-size-adjust: none;
+
+    height: 100%;
+
+}
+
+body {
+
+  height: 100%;
+
+  display: block;
+
+  place-items: center;
+
+}
+
+
+
+.tree-padding{
+
+  --spacing    : 1.5rem;
+
+  --radius     : 10px;
+
+  padding-left : 1rem;
+
+}
+
+
+
+.tree-padding li{
+
+  display      : block;
+
+  position     : relative;
+
+  padding-left : calc(2 * var(--spacing) - var(--radius) - 2px);
+
+}
+
+
+
+.tree-padding ul{
+
+  margin-left  : calc(var(--radius) - var(--spacing));
+
+  padding-left : 0;
+
+}
+
+
+
+.tree-vertical-lines ul li{
+
+  border-left : 2px solid var(--dark-grey);
+
+}
+
+
+
+.tree-vertical-lines ul li:last-child{
+
+  border-color : transparent;
+
+}
+
+
+
+.tree-horizontal-lines ul li::before{
+
+  content      : '';
+
+  display      : block;
+
+  position     : absolute;
+
+  top          : calc(var(--spacing) / -2);
+
+  left         : -2px;
+
+  width        : calc(var(--spacing) + 2px);
+
+  height       : calc(var(--spacing) + 1px);
+
+  border       : solid var(--dark-grey);
+
+  border-width : 0 0 2px 2px;
+
+}
+
+
+
+.tree-summaries summary{
+
+  display : block;
+
+  cursor  : pointer;
+
+}
+
+
+
+.tree-summaries summary::marker,
+
+.tree-summaries summary::-webkit-details-marker{
+
+  display : none;
+
+}
+
+
+
+.tree-summaries summary:focus{
+
+  outline : none;
+
+}
+
+
+
+.tree-summaries summary:focus-visible{
+
+  outline : 1px dotted #000;
+
+}
+
+
+
+.tree-markers li::after,
+
+.tree-markers summary::before{
+
+  content       : '';
+
+  display       : block;
+
+  position      : absolute;
+
+  top           : calc(var(--spacing) / 2 - var(--radius));
+
+  left          : calc(var(--spacing) - var(--radius) - 1px);
+
+  width         : calc(2 * var(--radius));
+
+  height        : calc(2 * var(--radius));
+
+  border-radius : 50%;
+
+  background    : var(--dark-grey);
+
+}
+
+
+
+.tree-buttons summary::before{
+
+  content     : '+';
+
+  z-index     : 1;
+
+  background  : var(--accent);
+
+  color       : #fff;
+
+  font-weight : 400;
+
+  line-height : calc(2 * var(--radius) - 2px);
+
+  text-align  : center;
+
+}
+
+
+
+.tree-buttons details[open] > summary::before{
+
+  content : '−';
+
+}
 
 /*test jQ wood list*/
 
-#cssmenu,
+/*#cssmenu,
 #cssmenu ul,
 #cssmenu ul li,
 #cssmenu ul li a,
