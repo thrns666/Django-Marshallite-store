@@ -22,3 +22,11 @@ def bot_page(request):
 def catalog(request):
     db_returns = DataTable.objects.all()
     return render(request, 'mainsite/catalog_page.html', {'title': 'Каталог', 'db_obj': db_returns})
+
+def product_catalog(request):
+    db_returns = DataTable.objects.all()
+    return render(request, 'mainsite/products_catalog.html', {'title': 'Каталог чего-то', 'db_obj': db_returns})
+
+def product_page(request):
+    db_returns = DataTable.objects.all()
+    return render(request, 'mainsite/product_page.html', {'title': 'Страница товара', 'db_obj': db_returns})

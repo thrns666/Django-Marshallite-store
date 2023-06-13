@@ -1,0 +1,36 @@
+{% extends 'mainsite/base.html' %}
+
+{% block content %}
+
+<h3> Наименование категории товаров</h3>
+
+<section class="main-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-sm-4 mb-3">
+        <div class="product-card">
+          <div class="product-thumb">
+            <a href="#"><img src="static/mainsite/img/wood.jpg" alt=""></a>
+          </div>
+          <div class="product-details">
+            <h4><a href="{% url 'product' %}">Доска клеенная березовая</a> </h4>
+            <p>Выполнена из клеенных брусьев березы, размеры изделия: 1200х250*22</p>
+            <div class="product-bottom-details d-flex justify-content-between">
+              <div class="product-price">
+                <small>27.88 руб.</small> 11.99 руб.
+              </div>
+              <div class="product-links">
+                <a href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+                <a href="#"><i class="fa-regular fa-heart"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock content %}
