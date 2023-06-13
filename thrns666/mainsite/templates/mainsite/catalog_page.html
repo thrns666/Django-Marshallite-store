@@ -1,84 +1,190 @@
 {% extends 'mainsite/base.html' %}
 
 {% block content %}
-<div class="accordion" id="accordionExample">
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        Сантехника
-      </button>
-    </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Электрика
-      </button>
-    </h2>
-    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-        Строительные смеси
-      </button>
-    </h2>
-    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <ul class="list-unstyled">
-          <li><a href="#"> Смесители</a> </li>
-          <li><a href="#"> Запорная арматура</a> </li>
-          <li><a href="#"> Трубы</a> </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
-        Электроинструмент
-      </button>
-    </h2>
-    <div id="collapseFour" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne">
-        Вентиляция
-      </button>
-    </h2>
-    <div id="collapseFive" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-      <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-      </div>
-    </div>
-  </div>
 
-</div>
-
-
-<!--<div class="list-group">-->
-<!--  <a href="#" class="list-group-item list-group-item-action" aria-current="true">-->
-<!--    The current link item-->
-<!--  </a>-->
-<!--  <a href="#" class="list-group-item list-group-item-action">A second link item</a>-->
-<!--  <a href="#" class="list-group-item list-group-item-action">A third link item</a>-->
-<!--  <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>-->
-<!--  <a class="list-group-item list-group-item-action disabled ">A disabled link item</a>-->
-<!--</div>-->
-
+<ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
+  <li>
+    <details open>
+      <summary>Инструмент</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Режущий</summary>
+            <ul>
+              <li>Пилы</li>
+              <li>Бензопилы</li>
+              <li>Стеклорезы</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Монтажный</summary>
+            <ul>
+              <li>Наборы ключей</li>
+              <li>Ударный инструмент</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+  <li>
+    <details open>
+      <summary>Сантехника</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Запорная арматура</summary>
+            <ul>
+              <li>Краны перекрывающие</li>
+              <li>Клапаны</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Смесители</summary>
+            <ul>
+              <li>Кухонные</li>
+              <li>Для санузлов</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Трубы</summary>
+            <ul>
+              <li>ПВХ</li>
+              <li>Металлические</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+  <li>
+    <details open>
+      <summary>Строительные материалы</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Смеси</summary>
+            <ul>
+              <li>Шпатлевка</li>
+              <li>Штукатурка</li>
+              <li>Клеевые составы</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Древесина</summary>
+            <ul>
+              <li>Доски обрезные</li>
+              <li>Брус</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Плитка</summary>
+            <ul>
+              <li>Напольная</li>
+              <li>Настенная</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+  <li>
+    <details open>
+      <summary>Электрика</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Провода</summary>
+            <ul>
+              <li>Кабеля</li>
+              <li>Провод</li>
+              <li>Элементы монтажа</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Электромонтажное оборудование</summary>
+            <ul>
+              <li>Розетки</li>
+              <li>Выключатели</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Защита электросетей</summary>
+            <ul>
+              <li>Стабилизаторы напряжения</li>
+              <li>Дифференциальные автоматы, УЗО</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+  <li>
+    <details open>
+      <summary>Электрооборудование</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Инструмент</summary>
+            <ul>
+              <li>Пилы дисковые</li>
+              <li>Дрели, перфораторы, шуруповерты</li>
+              <li>Болгарки</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Товары для пайки</summary>
+            <ul>
+              <li>Паяльники, паяльные станции</li>
+              <li>Аксессуары для пайки</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+  <li>
+    <details open>
+      <summary>Мебель</summary>
+      <ul>
+        <li>
+          <details>
+            <summary>Офисная</summary>
+            <ul>
+              <li>Столы</li>
+              <li>Стулья</li>
+              <li>Шкафы, комплекты</li>
+            </ul>
+          </details>
+        </li>
+        <li>
+          <details>
+            <summary>Для кухни и гостинной</summary>
+            <ul>
+              <li>Комплекты кухонные</li>
+              <li>Столы</li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </details>
+  </li>
+</ul>
 
 {% endblock content %}
