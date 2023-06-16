@@ -34,5 +34,5 @@ def product_catalog(request):
 
 def product_page(request):
     db_returns = ShopTable.objects.all()
-    print(request.META)
+    print(type(db_returns))
     return render(request, 'mainsite/product_page.html', {'title': 'Страница товара', 'db_obj': db_returns, 'font_awesome_token': font_awesome_token})
