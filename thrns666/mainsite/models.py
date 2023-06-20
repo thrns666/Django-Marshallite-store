@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 
 # Create your models here.
 
@@ -22,3 +24,6 @@ class ShopTable(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_url(self):
+        return reverse('product', kwargs={'product_id': self.pk})

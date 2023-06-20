@@ -28,11 +28,22 @@ def catalog(request):
 
 
 def product_catalog(request):
-    db_returns = ShopTable.objects.all()
-    return render(request, 'mainsite/products_catalog.html', {'title': 'Каталог чего-то', 'db_obj': db_returns, 'font_awesome_token': font_awesome_token})
+    db_returns = ShopTable.objects
+    context = {
+        'title': 'Каталог чего-то',
+        'db_obj': db_returns,
+        'font_awesome_token': font_awesome_token
+    }
+    return render(request, 'mainsite/products_catalog.html', context=context)
 
 
-def product_page(request):
-    db_returns = ShopTable.objects.all()
+def product_page(request, product_id):
+    db_returns = ShopTable.objects.get(pk=product_id)
     print(type(db_returns))
-    return render(request, 'mainsite/product_page.html', {'title': 'Страница товара', 'db_obj': db_returns, 'font_awesome_token': font_awesome_token})
+    context = {
+        'title': 'Страница товара',
+        'db_obj': db_returns,
+        'font_awesome_token': font_awesome_token,
+        'product_id': product_id
+    }
+    return render(request, 'mainsite/product_page.html', context=context)
