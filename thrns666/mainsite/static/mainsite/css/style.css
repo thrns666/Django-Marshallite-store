@@ -89,7 +89,7 @@ a:hover {
     font-size: 20px;
 }
 
-/* Modal */
+/* Modal BUY CART */
 .modal-title {
     margin-bottom: 0;
     line-height: var(--bs-modal-title-line-height);
@@ -187,7 +187,7 @@ a:hover {
 }
 
 .product-price small {
-    color: #ccc;
+    color: #878484;
     text-decoration: line-through;
     margin-right: 5px;
 }
