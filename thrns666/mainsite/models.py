@@ -27,7 +27,7 @@ class SubCategories(models.Model):
     main_cat = models.ForeignKey('MainCategory', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
-        return self.title
+        return self.name
 
     # def get_url(self):
     #     return reverse('product', kwargs={'product_id': self.pk})
@@ -43,5 +43,5 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    # def get_url(self):
-    #     return reverse('product', kwargs={'product_id': self.pk})
+    def get_url(self):
+        return reverse('product', kwargs={'product_id': self.pk})

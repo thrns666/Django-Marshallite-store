@@ -4,13 +4,14 @@ from django.shortcuts import render, redirect
 from .models import *
 from tokens import *
 
-menu = ['Главная страница', 'Каталог', 'Доставка', 'Обратная связь', 'Сотрудничество']
-
 
 # Create your views here.
 def index(request):
-    db_returns = ShopTable.objects.all()
-    return render(request, 'mainsite/index.html', {'title': 'Главная страница', 'head_menu': menu, 'categories': db_returns, 'font_awesome_token': font_awesome_token})
+    context = {
+        'title': 'Главная страница',
+        'font_awesome_token': font_awesome_token
+    }
+    return render(request, 'mainsite/index.html', context=context)
 
 
 def about(request):
@@ -23,12 +24,19 @@ def bot_page(request):
 
 
 def catalog(request):
-    db_returns = ShopTable.objects.all()
-    return render(request, 'mainsite/catalog_page.html', {'title': 'Каталог', 'db_obj': db_returns, 'font_awesome_token': font_awesome_token})
+    db_main_catalog = MainCategory.objects
+    db_sub_catalog = SubCategories.objects
+    context = {
+        'title': 'Каталог',
+        'db_main_cat': db_main_catalog,
+        'db_sub_cat': db_sub_catalog,
+        'font_awesome_token': font_awesome_token
+    }
+    return render(request, 'mainsite/catalog_page.html', context=context)
 
 
 def product_catalog(request):
-    db_returns = ShopTable.objects
+    db_returns = Product.objects
     context = {
         'title': 'Каталог чего-то',
         'db_obj': db_returns,
@@ -38,10 +46,9 @@ def product_catalog(request):
 
 
 def product_page(request, product_id):
-    db_returns = ShopTable.objects.get(pk=product_id)
-    print(type(db_returns))
+    db_returns = Product.objects.get(pk=product_id)
     context = {
-        'title': 'Страница товара',
+        'title': db_returns.title,
         'db_obj': db_returns,
         'font_awesome_token': font_awesome_token,
         'product_id': product_id
