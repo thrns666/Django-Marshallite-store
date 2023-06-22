@@ -4,6 +4,43 @@
 
 <ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
   <li>
+    {% for main in db_main_cat %}
+      <li>
+        <details open>
+          <summary>{{ main.name }}</summary>
+              {% for sub in db_sub_cat.all %}
+                {% if sub.main_cat_id == main.pk%}
+                  <ul>
+                    <li>
+                      <details>
+                        <summary>{{ sub.name }}</summary>
+                        {% if main.pk == sub.main_cat_id %}
+                          {% for last in db_last_cat.all %}
+                            {% if last.sub_cat_id == sub.pk %}
+                            <ul>
+                              <li><a href="{% url 'products_catalog' category_id %}">{{ last.name }}</a></li>
+                            </ul>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                      </details>
+                    </li>
+                  </ul>
+                {% endif %}
+              {% endfor %}
+        </details>
+    {% endfor %}
+  </li>
+</ul>
+
+
+
+
+
+
+
+<ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
+  <li>
     <details open>
       <summary>Инструмент</summary>
       <ul>

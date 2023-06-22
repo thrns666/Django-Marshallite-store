@@ -32,6 +32,13 @@ class SubCategories(models.Model):
     # def get_url(self):
     #     return reverse('product', kwargs={'product_id': self.pk})
 
+class LastCategories(models.Model):
+    name = models.CharField(max_length=50, db_index=True)
+    sub_cat = models.ForeignKey('SubCategories', on_delete=models.PROTECT, null=True)
+
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
     title = models.CharField(max_length=115, blank=True)
     description = models.TextField(blank=True)

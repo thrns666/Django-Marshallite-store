@@ -24,18 +24,20 @@ def bot_page(request):
 
 
 def catalog(request):
-    db_main_catalog = MainCategory.objects
+    db_main_catalog = MainCategory.objects.all()
     db_sub_catalog = SubCategories.objects
+    db_last_catalog = LastCategories.objects
     context = {
         'title': 'Каталог',
         'db_main_cat': db_main_catalog,
         'db_sub_cat': db_sub_catalog,
+        'db_last_cat': db_last_catalog,
         'font_awesome_token': font_awesome_token
     }
     return render(request, 'mainsite/catalog_page.html', context=context)
 
 
-def product_catalog(request):
+def product_catalog(request, category_id):
     db_returns = Product.objects
     context = {
         'title': 'Каталог чего-то',
