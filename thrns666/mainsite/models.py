@@ -39,13 +39,16 @@ class LastCategories(models.Model):
     def __str__(self):
         return self.name
 
+    def get_url(self):
+        return reverse('products_catalog', kwargs={'category_id': self.pk})
+
 class Product(models.Model):
     title = models.CharField(max_length=115, blank=True)
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to='photos/%y/')
     price = models.CharField(max_length=20, default='0')
     availability = models.BooleanField(default=True)
-    cat = models.ForeignKey('SubCategories', on_delete=models.PROTECT, null=True)
+    cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.title

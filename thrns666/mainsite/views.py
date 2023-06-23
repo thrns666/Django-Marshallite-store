@@ -38,13 +38,15 @@ def catalog(request):
 
 
 def product_catalog(request, category_id):
-    db_returns = Product.objects
+    db_returns = Product.objects.filter(cat_id=category_id)
     context = {
-        'title': 'Каталог чего-то',
+        'title': LastCategories.objects.get(id=category_id).name,
         'db_obj': db_returns,
         'font_awesome_token': font_awesome_token
     }
     return render(request, 'mainsite/products_catalog.html', context=context)
+
+
 
 
 def product_page(request, product_id):
