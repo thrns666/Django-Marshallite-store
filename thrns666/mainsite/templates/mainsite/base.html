@@ -29,7 +29,7 @@
           <a class="nav-link" aria-current="page" href="{% url 'homepage'%}">Главная страница</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'catalog'%}">Каталог</a>
+          <a class="nav-link" href="{% url 'catalog' category_id=0 %}">Каталог</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Информация</a>
@@ -85,6 +85,9 @@
 </nav>
 
 {% endblock head_menu %}
+
+{% block tree_catalog %}
+{% endblock tree_catalog %}
 
 {% block content%}
 {% endblock content %}

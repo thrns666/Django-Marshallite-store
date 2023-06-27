@@ -40,7 +40,7 @@ class LastCategories(models.Model):
         return self.name
 
     def get_url(self):
-        return reverse('products_catalog', kwargs={'category_id': self.pk})
+        return reverse('catalog', kwargs={'category_id': self.pk})
 
 class Product(models.Model):
     title = models.CharField(max_length=115, blank=True)

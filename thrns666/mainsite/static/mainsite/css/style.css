@@ -9,6 +9,7 @@ body {
     color: #000000;
     background-color: #fff;
     min-width: 320px;
+    overflow-x: hidden;
 }
 
 img {
@@ -411,4 +412,37 @@ body {
 
   content : '−';
 
+}
+
+
+
+/*sidebar catalog*/
+
+.content, .sidebar {
+	border: 1px solid white;
+	color: white;
+	padding: 20px;
+	text-transform: uppercase;
+	min-height: 500px;
+}
+
+.content {
+	min-height: 2000px;
+}
+
+.sidebar::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	background: #DB4ECB;
+	z-index: -1;
+	margin-left: -35px;
+}
+
+@media screen and (max-width: 991px) {
+	.sidebar::before {
+		display: none;
+	}
 }

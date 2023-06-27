@@ -23,28 +23,43 @@ def bot_page(request):
     return render(request, 'mainsite/bot_page.html', {'title': 'Страница запросов', 'db_obj': db_returns, 'font_awesome_token': font_awesome_token})
 
 
-def catalog(request):
+def catalog(request, category_id=0):
     db_main_catalog = MainCategory.objects.all()
     db_sub_catalog = SubCategories.objects
     db_last_catalog = LastCategories.objects
+    db_products = Product.objects.filter(cat_id=category_id)
+
+    if category_id:
+        selected_category = category_id
+        title = LastCategories.objects.get(pk=category_id).name
+    else:
+        selected_category = 0
+        title = 'Каталог'
+
+
+
+    print(selected_category)
+
     context = {
-        'title': 'Каталог',
+        'title': title,
         'db_main_cat': db_main_catalog,
         'db_sub_cat': db_sub_catalog,
         'db_last_cat': db_last_catalog,
+        'db_products': db_products,
+        'selected_category': selected_category,
         'font_awesome_token': font_awesome_token
     }
     return render(request, 'mainsite/catalog_page.html', context=context)
 
 
-def product_catalog(request, category_id):
-    db_returns = Product.objects.filter(cat_id=category_id)
-    context = {
-        'title': LastCategories.objects.get(id=category_id).name,
-        'db_obj': db_returns,
-        'font_awesome_token': font_awesome_token
-    }
-    return render(request, 'mainsite/products_catalog.html', context=context)
+# def product_catalog(request, category_id):
+#     db_returns = Product.objects.filter(cat_id=category_id)
+#     context = {
+#         'title': LastCategories.objects.get(id=category_id).name,
+#         'db_obj': db_returns,
+#         'font_awesome_token': font_awesome_token
+#     }
+#     return render(request, 'mainsite/products_catalog.html', context=context)
 
 
 

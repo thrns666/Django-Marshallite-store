@@ -6,7 +6,7 @@ urlpatterns = [
     path('', index, name='homepage'),
     path('about/', about, name='about'),
     path('bot_page/', bot_page, name='bot_page'),
-    path('catalog/', catalog, name='catalog'),
-    path('products/<int:category_id>/', product_catalog, name='products_catalog'),
+    path('catalog/<int:category_id>/', catalog, name='catalog'),
+    # path('products/<int:category_id>/', product_catalog, name='products_catalog'),
     path('product/<int:product_id>/', product_page, name='product')
 ]
