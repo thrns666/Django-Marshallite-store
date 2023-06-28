@@ -427,3 +427,8 @@ body {
     margin-right: auto;
     margin-left: auto;
 }
+
+.catalog {
+    margin-left: 1px;
+    min-height: 500px;
+}
