@@ -1,0 +1,78 @@
+{% extends 'mainsite/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="catalog">
+                <ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
+                    <li>
+                        {% for main in db_main_cat %}
+                          <li>
+                            <details open>
+                              <summary>{{ main.name }}</summary>
+                                  {% for sub in db_sub_cat.all %}
+                                    {% if sub.main_cat_id == main.pk%}
+                                      <ul>
+                                        <li>
+                                          <details>
+                                            <summary>{{ sub.name }}</summary>
+                                            {% if main.pk == sub.main_cat_id %}
+                                              {% for last in db_last_cat.all %}
+                                                {% if last.sub_cat_id == sub.pk %}
+                                                <ul>
+                                                  <li><a href="{{ last.get_url }}">{{ last.name }}</a></li>
+                                                </ul>
+                                                {% endif %}
+                                              {% endfor %}
+                                            {% endif %}
+                                          </details>
+                                        </li>
+                                      </ul>
+                                    {% endif %}
+                                  {% endfor %}
+                            </details>
+                        {% endfor %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+        <div class="col-md-1">
+            <h5>main</h5>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

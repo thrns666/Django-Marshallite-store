@@ -49,7 +49,7 @@ def catalog(request, category_id=0):
         'selected_category': selected_category,
         'font_awesome_token': font_awesome_token
     }
-    return render(request, 'mainsite/catalog_page.html', context=context)
+    return render(request, 'mainsite/new_cat.html', context=context)
 
 
 # def product_catalog(request, category_id):

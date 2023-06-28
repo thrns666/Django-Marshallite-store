@@ -418,31 +418,12 @@ body {
 
 /*sidebar catalog*/
 
-.content, .sidebar {
-	border: 1px solid white;
-	color: white;
-	padding: 20px;
-	text-transform: uppercase;
-	min-height: 500px;
-}
-
-.content {
-	min-height: 2000px;
-}
-
-.sidebar::before {
-	content: '';
-	position: fixed;
-	top: 0;
-	width: 100vw;
-	height: 100vh;
-	background: #DB4ECB;
-	z-index: -1;
-	margin-left: -35px;
-}
-
-@media screen and (max-width: 991px) {
-	.sidebar::before {
-		display: none;
-	}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: auto;
+    margin-left: auto;
 }

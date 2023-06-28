@@ -1,0 +1,66 @@
+{% extends 'mainsite/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="sidebar">
+            <div class="col-md-1">
+                <ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
+                  <li>
+                    {% for main in db_main_cat %}
+                      <li>
+                        <details open>
+                          <summary>{{ main.name }}</summary>
+                              {% for sub in db_sub_cat.all %}
+                                {% if sub.main_cat_id == main.pk %}
+                                  <ul>
+                                    <li>
+                                      <details>
+                                        <summary>{{ sub.name }}</summary>
+                                        {% if main.pk == sub.main_cat_id %}
+                                          {% for last in db_last_cat.all %}
+                                            {% if last.sub_cat_id == sub.pk %}
+                                            <ul>
+                                              <li><a href="{{ last.get_url }}">{{ last.name }}</a></li>
+                                            </ul>
+                                            {% endif %}
+                                          {% endfor %}
+                                        {% endif %}
+                                      </details>
+                                    </li>
+                                  </ul>
+                                {% endif %}
+                              {% endfor %}
+                        </details>
+                    {% endfor %}
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="content">
+            {% for i in db_products %}
+                <div class="col-lg-2 col-sm-4 mb-2">
+                  <div class="product-card">
+                    <div class="product-thumb">
+                      <a href="#"><img src="{{i.photo}}" alt=""></a>
+                    </div>
+                    <div class="product-details">
+                      <h4><a href="{{ i.get_url }}">{{i.title}}</a></h4>
+                      <p>{{i.description|truncatewords:10}}</p>
+                      <div class="product-bottom-details d-flex justify-content-between">
+                        <div class="product-price">
+                          <small>27.88 руб.</small> {{i.price}}
+                        </div>
+                        <div class="product-links">
+                          <a href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+                          <a href="#"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
