@@ -39,7 +39,7 @@ class LastCategories(models.Model):
     def __str__(self):
         return self.name
 
-    def get_url(self):
+    def get_absolute_url(self):
         return reverse('catalog', kwargs={'category_id': self.pk})
 
 class Product(models.Model):
@@ -53,5 +53,10 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def get_url(self):
+    class Meta:
+        verbose_name = 'Продукция'
+        verbose_name_plural = 'Продукция'
+        ordering = ['title', 'availability', 'price', 'cat']
+
+    def get_absolute_url(self):
         return reverse('product', kwargs={'product_id': self.pk})
