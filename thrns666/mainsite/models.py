@@ -43,12 +43,12 @@ class LastCategories(models.Model):
         return reverse('catalog', kwargs={'category_id': self.pk})
 
 class Product(models.Model):
-    title = models.CharField(max_length=115, blank=True)
+    title = models.CharField(max_length=115, blank=True, verbose_name='Название')
     description = models.TextField(blank=True)
     photo = models.ImageField(upload_to='photos/%y/')
-    price = models.CharField(max_length=20, default='0')
-    availability = models.BooleanField(default=True)
-    cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, null=True)
+    price = models.CharField(max_length=20, default='0', verbose_name='Стоимость')
+    availability = models.BooleanField(default=True, verbose_name='Наличие')
+    cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, null=True, verbose_name='Категория')
 
     def __str__(self):
         return self.title
@@ -57,6 +57,7 @@ class Product(models.Model):
         verbose_name = 'Продукция'
         verbose_name_plural = 'Продукция'
         ordering = ['title', 'availability', 'price', 'cat']
+
 
     def get_absolute_url(self):
         return reverse('product', kwargs={'product_id': self.pk})
