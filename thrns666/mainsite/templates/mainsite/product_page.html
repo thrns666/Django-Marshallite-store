@@ -2,7 +2,9 @@
 
 {% block content %}
     <h3> {{db_obj.title}} </h3>
-    <img src="{{item.photo}}">
+{% if db.obj.photo%}
+    <img src="{{db_obj.photo.url}}">
+{% endif %}
     <p>{{db_obj.price}}</p>
     <p>{{db_obj.description}}</p>
 {% if db_obj.availability %}

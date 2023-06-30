@@ -33,11 +33,17 @@ class SubCategories(models.Model):
     #     return reverse('product', kwargs={'product_id': self.pk})
 
 class LastCategories(models.Model):
-    name = models.CharField(max_length=50, db_index=True)
+    name = models.CharField(max_length=50, db_index=True, verbose_name='Категории')
     sub_cat = models.ForeignKey('SubCategories', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+        ordering = ['id', 'name']
+
 
     def get_absolute_url(self):
         return reverse('catalog', kwargs={'category_id': self.pk})
@@ -57,6 +63,7 @@ class Product(models.Model):
         verbose_name = 'Продукция'
         verbose_name_plural = 'Продукция'
         ordering = ['title', 'availability', 'price', 'cat']
+
 
 
     def get_absolute_url(self):
