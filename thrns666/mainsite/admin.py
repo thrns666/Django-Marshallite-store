@@ -7,7 +7,7 @@ class MainsiteAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'price', 'availability', 'cat')
     list_display_links = ('title',)
     search_fields = ('title', 'description')
-    list_editable = ('availability',)
+    list_editable = ('availability', 'price')
     list_filter = ('cat', 'price', 'availability')
 
 class LastCategoriesAdmin(admin.ModelAdmin):

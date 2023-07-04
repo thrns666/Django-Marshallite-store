@@ -15,7 +15,7 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'mainsite/about.html', {'title': 'О данном сайте', 'main_menu': menu, 'font_awesome_token': font_awesome_token})
+    return render(request, 'mainsite/about.html', {'title': 'О данном сайте', 'font_awesome_token': font_awesome_token})
 
 
 def bot_page(request):
@@ -52,18 +52,6 @@ def catalog(request, category_id=0):
     return render(request, 'mainsite/new_cat.html', context=context)
 
 
-# def product_catalog(request, category_id):
-#     db_returns = Product.objects.filter(cat_id=category_id)
-#     context = {
-#         'title': LastCategories.objects.get(id=category_id).name,
-#         'db_obj': db_returns,
-#         'font_awesome_token': font_awesome_token
-#     }
-#     return render(request, 'mainsite/products_catalog.html', context=context)
-
-
-
-
 def product_page(request, product_id):
     db_returns = Product.objects.get(pk=product_id)
     context = {
@@ -72,4 +60,7 @@ def product_page(request, product_id):
         'font_awesome_token': font_awesome_token,
         'product_id': product_id
     }
+
+    print(db_returns.photo)
+
     return render(request, 'mainsite/product_page.html', context=context)
