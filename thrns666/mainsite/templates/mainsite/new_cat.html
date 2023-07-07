@@ -39,11 +39,13 @@
         </div>
 
 
-        {% for i in db_products %}
+{% for i in db_products %}
             <div class="col-md-2">
               <div class="product-card">
                 <div class="product-thumb">
+{% if i.photo %}
                   <img src="{{i.photo.url}}">
+{% endif %}
                 </div>
                 <div class="product-details">
                   <h4><a href="{{ i.get_absolute_url }}">{{i.title}}</a> </h4>
@@ -60,6 +62,6 @@
                 </div>
               </div>
             </div>
-        {% endfor %}
+{% endfor %}
 
 {% endblock content %}
