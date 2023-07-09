@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import *
 from tokens import *
@@ -18,15 +18,7 @@ def about(request):
     return render(request, 'mainsite/about.html', {'title': 'О данном сайте', 'font_awesome_token': font_awesome_token})
 
 
-def bot_page(request):
-    db_returns = DataTable.objects.all()
-    return render(request, 'mainsite/bot_page.html', {'title': 'Страница запросов', 'db_obj': db_returns, 'font_awesome_token': font_awesome_token})
-
-
 def catalog(request, category_id=0):
-    db_main_catalog = MainCategory.objects.all()
-    db_sub_catalog = SubCategories.objects
-    db_last_catalog = LastCategories.objects
     db_products = Product.objects.filter(cat_id=category_id)
 
     if category_id:
@@ -36,15 +28,8 @@ def catalog(request, category_id=0):
         selected_category = 0
         title = 'Каталог'
 
-
-
-    print(selected_category)
-
     context = {
         'title': title,
-        'db_main_cat': db_main_catalog,
-        'db_sub_cat': db_sub_catalog,
-        'db_last_cat': db_last_catalog,
         'db_products': db_products,
         'selected_category': selected_category,
         'font_awesome_token': font_awesome_token
@@ -53,14 +38,11 @@ def catalog(request, category_id=0):
 
 
 def product_page(request, product_id):
-    db_returns = Product.objects.get(pk=product_id)
+    product = get_object_or_404(Product, pk=product_id)
     context = {
-        'title': db_returns.title,
-        'db_obj': db_returns,
+        'title': product.title,
+        'product': product,
         'font_awesome_token': font_awesome_token,
         'product_id': product_id
     }
-
-    print(db_returns.photo)
-
     return render(request, 'mainsite/product_page.html', context=context)

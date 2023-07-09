@@ -16,24 +16,25 @@ class DataTable(models.Model):
         return self.title
 
 
-class MainCategory(models.Model):
+class MainCategories(models.Model):
     name = models.CharField(max_length=50, db_index=True, null=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
 
     def __str__(self):
         return self.name
 
 class SubCategories(models.Model):
     name = models.CharField(max_length=50, db_index=True)
-    main_cat = models.ForeignKey('MainCategory', on_delete=models.PROTECT, null=True)
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
+    main_cat = models.ForeignKey('MainCategories', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return self.name
 
-    # def get_url(self):
-    #     return reverse('product', kwargs={'product_id': self.pk})
 
 class LastCategories(models.Model):
     name = models.CharField(max_length=50, db_index=True, verbose_name='Категории')
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     sub_cat = models.ForeignKey('SubCategories', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
@@ -54,6 +55,7 @@ class Product(models.Model):
     photo = models.ImageField(upload_to='photos/%y/')
     price = models.CharField(max_length=20, default='0', verbose_name='Стоимость')
     availability = models.BooleanField(default=True, verbose_name='Наличие')
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, null=True, verbose_name='Категория')
 
     def __str__(self):

@@ -12,10 +12,21 @@ class MainsiteAdmin(admin.ModelAdmin):
 
 class LastCategoriesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
-    list_display_links = ('name',)
     search_fields = ('name',)
+
+class SubCategoriesAdmin(admin.ModelAdmin):
+    list_display = ('name', 'main_cat', 'slug')
+    search_fields = ('name',)
+
+
+class MainCategoriesAdmin(admin.ModelAdmin):
+    list_display = ('name', 'id', 'slug')
+    search_fields = ('name',)
+
 
 admin.site.register(Product, MainsiteAdmin)
 admin.site.register(LastCategories, LastCategoriesAdmin)
+admin.site.register(SubCategories, SubCategoriesAdmin)
+admin.site.register(MainCategories, MainCategoriesAdmin)
 
 

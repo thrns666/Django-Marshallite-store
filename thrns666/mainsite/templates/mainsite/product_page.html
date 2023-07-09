@@ -1,13 +1,13 @@
 {% extends 'mainsite/base.html' %}
 
 {% block content %}
-    <h3> {{db_obj.title}} </h3>
-{% if db_obj.photo%}
-    <img src="{{db_obj.photo.url}}">
+    <h3> {{product.title}} </h3>
+{% if product.photo%}
+    <img src="{{product.photo.url}}">
 {% endif %}
-    <p>{{db_obj.price}}</p>
-    <p>{{db_obj.description}}</p>
-{% if db_obj.availability %}
+    <p>{{product.price}}</p>
+    <p>{{product.description}}</p>
+{% if product.availability %}
     <h5>В наличии</h5>
 {% else %}
     <h5>Нет в наличии</h5>

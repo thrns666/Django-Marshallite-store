@@ -71,6 +71,7 @@ a:hover {
     font-size: 14px;
     border-bottom: 1px solid #666;
     padding-bottom: 3px;
+    width: 100%;
 }
 .footer a {
     text-decoration: none;
