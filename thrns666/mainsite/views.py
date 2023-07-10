@@ -17,15 +17,15 @@ def about(request):
     return render(request, 'mainsite/about.html', {'title': 'О данном сайте'})
 
 
-def catalog(request, category_id=0):
-    db_products = Product.objects.filter(cat_id=category_id)
-
-    if category_id:
-        selected_category = category_id
-        title = LastCategories.objects.get(pk=category_id).name
+def catalog(request, category_slug):
+    if category_slug!='start':
+        selected_category = category_slug
+        title = LastCategories.objects.get(slug=category_slug).name
     else:
-        selected_category = 0
+        selected_category = None
         title = 'Каталог'
+
+    db_products = Product.objects.filter(slug=category_slug)
 
     context = {
         'title': title,
@@ -35,13 +35,12 @@ def catalog(request, category_id=0):
     return render(request, 'mainsite/new_cat.html', context=context)
 
 
-def product_page(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
+def product_page(request, product_slug):
+    product = get_object_or_404(Product, slug=product_slug)
 
     context = {
         'title': product.title,
         'product': product,
-        'font_awesome_token': font_awesome_token
     }
 
     return render(request, 'mainsite/product_page.html', context=context)

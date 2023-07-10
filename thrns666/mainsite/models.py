@@ -56,7 +56,7 @@ class LastCategories(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('catalog', kwargs={'category_id': self.pk})
+        return reverse('catalog', kwargs={'category_slug': self.slug})
 
 class Product(models.Model):
     title = models.CharField(max_length=115, blank=True, verbose_name='Название')
@@ -78,4 +78,4 @@ class Product(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('product', kwargs={'product_id': self.pk})
+        return reverse('product', kwargs={'product_slug': self.slug})
