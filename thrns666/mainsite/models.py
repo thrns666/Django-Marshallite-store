@@ -17,16 +17,25 @@ class DataTable(models.Model):
 
 
 class MainCategories(models.Model):
-    name = models.CharField(max_length=50, db_index=True, null=True)
+    name = models.CharField(max_length=50, db_index=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
 
+    class Meta:
+        verbose_name = 'Категория 1го уровня'
+        verbose_name_plural = 'Категории 1го уровня'
+        ordering = ['id', 'name']
     def __str__(self):
         return self.name
 
 class SubCategories(models.Model):
     name = models.CharField(max_length=50, db_index=True)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
-    main_cat = models.ForeignKey('MainCategories', on_delete=models.PROTECT, null=True)
+    main_cat = models.ForeignKey('MainCategories', on_delete=models.PROTECT)
+
+    class Meta:
+        verbose_name = 'Категория 2го уровня'
+        verbose_name_plural = 'Категории 2го уровня'
+        ordering = ['id', 'name']
 
     def __str__(self):
         return self.name
@@ -35,14 +44,14 @@ class SubCategories(models.Model):
 class LastCategories(models.Model):
     name = models.CharField(max_length=50, db_index=True, verbose_name='Категории')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
-    sub_cat = models.ForeignKey('SubCategories', on_delete=models.PROTECT, null=True)
+    sub_cat = models.ForeignKey('SubCategories', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = 'Категория 3го уровня'
+        verbose_name_plural = 'Категории 3го уровня'
         ordering = ['id', 'name']
 
 
@@ -56,7 +65,7 @@ class Product(models.Model):
     price = models.CharField(max_length=20, default='0', verbose_name='Стоимость')
     availability = models.BooleanField(default=True, verbose_name='Наличие')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
-    cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, null=True, verbose_name='Категория')
+    cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, verbose_name='Категория')
 
     def __str__(self):
         return self.title

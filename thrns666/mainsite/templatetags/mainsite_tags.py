@@ -1,5 +1,6 @@
 from django import template
 from mainsite.models import *
+from tokens import *
 
 register = template.Library()
 
@@ -14,3 +15,11 @@ def get_sub_cats():
 @register.simple_tag(name='last_cats')
 def get_last_cats():
     return LastCategories.objects.all()
+
+@register.simple_tag(name='bootstrap_token')
+def get_bootstrap_token():
+    return bootstrap_integrity
+
+@register.simple_tag(name='fonts_token')
+def get_fonts_token():
+    return font_awesome_token

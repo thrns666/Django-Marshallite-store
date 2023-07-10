@@ -9,19 +9,23 @@ class MainsiteAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     list_editable = ('availability', 'price')
     list_filter = ('cat', 'price', 'availability')
+    prepopulated_fields = {'slug': ('title',)}
 
 class LastCategoriesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
 
 class SubCategoriesAdmin(admin.ModelAdmin):
     list_display = ('name', 'main_cat', 'slug')
     search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class MainCategoriesAdmin(admin.ModelAdmin):
     list_display = ('name', 'id', 'slug')
     search_fields = ('name',)
+    prepopulated_fields = {'slug': ('name',)}
 
 
 admin.site.register(Product, MainsiteAdmin)
