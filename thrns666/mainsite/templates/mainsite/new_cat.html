@@ -2,9 +2,9 @@
 {% load mainsite_tags %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
+        <div class="ml-auto col-md-3">
             <div class="catalog">
                 <ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
                     <li>
@@ -41,33 +41,35 @@
                 </ul>
             </div>
         </div>
-    </div>
-</div>
+<!--    </div>-->
+<!--</div>-->
 
 
-{% for i in db_products %}
-<div class="col-md-2">
-    <div class="product-card">
-        <div class="product-thumb">
-        {% if i.photo %}
-            <img src="{{i.photo.url}}">
-        {% endif %}
-        </div>
-        <div class="product-details">
-            <h4><a href="{{ i.get_absolute_url }}">{{i.title}}</a></h4>
-            <p>{{i.description|truncatewords:10}}</p>
-            <div class="product-bottom-details d-flex justify-content-between">
-                <div class="product-price">
-                    <small>27.88 руб.</small> {{i.price}}
+        {% for i in db_products %}
+        <div class="col-md-2">
+            <div class="product-card">
+                <div class="product-thumb">
+                {% if i.photo %}
+                    <img src="{{i.photo.url}}">
+                {% endif %}
                 </div>
-                <div class="product-links">
-                    <a href="#"><i class="fa-solid fa-basket-shopping"></i></a>
-                    <a href="#"><i class="fa-regular fa-heart"></i></a>
+                <div class="product-details">
+                    <h4><a href="{{ i.get_absolute_url }}">{{i.title}}</a></h4>
+                    <p>{{i.description|truncatewords:10}}</p>
+                    <div class="product-bottom-details d-flex justify-content-between">
+                        <div class="product-price">
+                            <small>27.88 руб.</small> {{i.price}}
+                        </div>
+                        <div class="product-links">
+                            <a href="#"><i class="fa-solid fa-basket-shopping"></i></a>
+                            <a href="#"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        {% endfor %}
     </div>
 </div>
-{% endfor %}
-
 {% endblock content %}

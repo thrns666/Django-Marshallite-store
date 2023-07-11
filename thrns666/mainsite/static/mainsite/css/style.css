@@ -153,8 +153,8 @@ a:hover {
 
 .product-thumb img {
     padding: 20px;
-    max-width: 100%;
-    max-height: 100%;
+    width: 196px;
+    height: 196px;
 }
 
 .product-details {
@@ -163,7 +163,7 @@ a:hover {
 }
 
 .product-details h4 a {
-    font-size: 22px;
+    font-size: 16px;
     display: block;
     height: 60px;
     overflow: hidden;

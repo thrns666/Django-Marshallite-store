@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import *
@@ -18,21 +18,27 @@ def about(request):
 
 
 def catalog(request, category_slug):
-    if category_slug!='start':
-        selected_category = category_slug
+    if category_slug == 'index':
+        db_products = None
+        context = {
+            'title': 'Каталог',
+            'db_products': db_products
+        }
+
+        return render(request, 'mainsite/new_cat.html', context=context)
+
+    elif LastCategories.objects.get(slug=category_slug):
+        db_products = Product.objects.filter(cat_id=LastCategories.objects.get(slug=category_slug).pk)
         title = LastCategories.objects.get(slug=category_slug).name
+        context = {
+            'title': title,
+            'db_products': db_products
+        }
+
+        return render(request, 'mainsite/new_cat.html', context=context)
+
     else:
-        selected_category = None
-        title = 'Каталог'
-
-    db_products = Product.objects.filter(slug=category_slug)
-
-    context = {
-        'title': title,
-        'db_products': db_products,
-        'selected_category': selected_category
-    }
-    return render(request, 'mainsite/new_cat.html', context=context)
+        return Http404
 
 
 def product_page(request, product_slug):

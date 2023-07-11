@@ -16,9 +16,13 @@ def get_sub_cats():
 def get_last_cats():
     return LastCategories.objects.all()
 
-@register.simple_tag(name='bootstrap_token')
+@register.simple_tag(name='bootstrap_link_token')
 def get_bootstrap_token():
-    return bootstrap_integrity
+    return bootstrap_link_integrity
+
+@register.simple_tag(name='bootstrap_script_token')
+def get_bootstrap_token():
+    return bootstrap_script_integrity
 
 @register.simple_tag(name='fonts_token')
 def get_fonts_token():
