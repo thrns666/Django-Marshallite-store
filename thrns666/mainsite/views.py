@@ -2,7 +2,7 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import *
-from tokens import *
+from .forms import *
 
 
 # Create your views here.
@@ -14,7 +14,8 @@ def index(request):
 
 
 def about(request):
-    return render(request, 'mainsite/about.html', {'title': 'О данном сайте'})
+    form = AddProductForm()
+    return render(request, 'mainsite/about.html', {'from': form, 'title': 'О данном сайте'})
 
 
 def catalog(request, category_slug):
@@ -28,7 +29,7 @@ def catalog(request, category_slug):
         return render(request, 'mainsite/new_cat.html', context=context)
 
     elif LastCategories.objects.get(slug=category_slug):
-        db_products = Product.objects.filter(cat_id=LastCategories.objects.get(slug=category_slug).pk)
+        db_products = Product.objects.filter(cat_id__slug=category_slug)
         title = LastCategories.objects.get(slug=category_slug).name
         context = {
             'title': title,
