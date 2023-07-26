@@ -14,7 +14,14 @@ def index(request):
 
 
 def about(request):
-    form = AddProductForm()
+    if request.method == 'POST':
+        form = AddProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('homepage')
+    else:
+        form = AddProductForm()
+
     return render(request, 'mainsite/about.html', {'from': form, 'title': 'О данном сайте'})
 
 

@@ -60,9 +60,9 @@ class LastCategories(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=115, blank=True, verbose_name='Название')
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, verbose_name='Описание')
     photo = models.ImageField(upload_to='photos/%y/')
-    price = models.CharField(max_length=20, default='0', verbose_name='Стоимость')
+    price = models.CharField(max_length=20, default='0 руб.', verbose_name='Стоимость')
     availability = models.BooleanField(default=True, verbose_name='Наличие')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, verbose_name='Категория')

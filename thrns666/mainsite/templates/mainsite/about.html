@@ -1,7 +1,7 @@
 {% extends 'mainsite/base.html' %}
 
 {% block content %}
-<form action="{% url 'about' %}" method="post">
+<form action="{% url 'about' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ from.as_p }}
     <button type="submit">Add</button>
