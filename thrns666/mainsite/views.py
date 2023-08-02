@@ -1,16 +1,57 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView
 
 from .models import *
 from .forms import *
 
 
 # Create your views here.
-def index(request):
-    context = {
-        'title': 'Главная страница'
-    }
-    return render(request, 'mainsite/index.html', context=context)
+class HomePage(ListView):
+    model = Slider
+    template_name = 'mainsite/index.html'
+    context_object_name = 'slides'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Интернет-магазин Marshalite'
+        return context
+
+
+
+class CatalogProducts(ListView):
+    model = Product
+    template_name = 'mainsite/new_cat.html'
+    context_object_name = 'db_products'
+    allow_empty = False
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.kwargs['category_slug'] != 'index':
+            context['title'] = LastCategories.objects.get(slug=self.kwargs['category_slug']).name
+        else:
+            context['title'] = 'Категории товаров'
+
+        return context
+
+    def get_queryset(self):
+        if self.kwargs['category_slug'] != 'index':
+            return Product.objects.filter(cat_id__slug=self.kwargs['category_slug'])
+        else:
+            return ''
+
+
+class ProductPage(DetailView):
+    model = Product
+    template_name = 'mainsite/product_page.html'
+    context_object_name = 'product'
+    slug_url_kwarg = 'product_slug'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = context['product']
+        return context
 
 
 def about(request):
@@ -25,36 +66,6 @@ def about(request):
     return render(request, 'mainsite/about.html', {'from': form, 'title': 'О данном сайте'})
 
 
-def catalog(request, category_slug):
-    if category_slug == 'index':
-        db_products = None
-        context = {
-            'title': 'Каталог',
-            'db_products': db_products
-        }
-
-        return render(request, 'mainsite/new_cat.html', context=context)
-
-    elif LastCategories.objects.get(slug=category_slug):
-        db_products = Product.objects.filter(cat_id__slug=category_slug)
-        title = LastCategories.objects.get(slug=category_slug).name
-        context = {
-            'title': title,
-            'db_products': db_products
-        }
-
-        return render(request, 'mainsite/new_cat.html', context=context)
-
-    else:
-        return Http404
 
 
-def product_page(request, product_slug):
-    product = get_object_or_404(Product, slug=product_slug)
 
-    context = {
-        'title': product.title,
-        'product': product,
-    }
-
-    return render(request, 'mainsite/product_page.html', context=context)
