@@ -1,7 +1,7 @@
 {% extends 'mainsite/base.html' %}
 {% load mainsite_tags %}
 
-{% block content %}
+{% block tree_catalog %}
 <div class="container-fluid">
     <div class="row">
         <div class="ml-auto col-md-3">
@@ -18,33 +18,36 @@
                                         {% if sub.main_cat_id == main.pk%}
                                             <ul>
                                                 <li>
-                                                  <details>
-                                                    <summary>{{ sub.name }}</summary>
-                                                    {% if main.pk == sub.main_cat_id %}
-                                                      {% last_cats as l_cats %}
-                                                      {% for last in l_cats %}
-                                                        {% if last.sub_cat_id == sub.pk %}
-                                                        <ul>
-                                                          <li><a href="{{ last.get_absolute_url }}">{{ last.name }}</a></li>
-                                                        </ul>
-                                                        {% endif %}
-                                                      {% endfor %}
+                                                    {% if selected_cat == sub.id %}
+                                                      <details open>
+                                                    {% else %}
+                                                      <details>
                                                     {% endif %}
-                                                  </details>
-                                                </li>
-                                            </ul>
-                                        {% endif %}
-                                    {% endfor %}
-                            </details>
-                        {% endfor %}
-                    </li>
-                </ul>
+                                                        <summary>{{ sub.name }}</summary>
+                                                        {% if main.pk == sub.main_cat_id %}
+                                                          {% last_cats as l_cats %}
+                                                          {% for last in l_cats %}
+                                                            {% if last.sub_cat_id == sub.pk %}
+                                                            <ul>
+                                                              <li><a href="{{ last.get_absolute_url }}">{{ last.name }}</a></li>
+                                                            </ul>
+                                                            {% endif %}
+                                                          {% endfor %}
+                                                        {% endif %}
+                                                      </details>
+                                                    </li>
+                                                </ul>
+                                            {% endif %}
+                                        {% endfor %}
+                                </details>
+                            {% endfor %}
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-<!--    </div>-->
-<!--</div>-->
+{% endblock tree_catalog %}
 
-
+{% block content%}
         {% for i in db_products %}
         <div class="col-md-2">
             <div class="product-card">
@@ -68,7 +71,6 @@
                 </div>
             </div>
         </div>
-
         {% endfor %}
     </div>
 </div>

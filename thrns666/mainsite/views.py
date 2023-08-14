@@ -23,13 +23,15 @@ class CatalogProducts(ListView):
     model = Product
     template_name = 'mainsite/new_cat.html'
     context_object_name = 'db_products'
-    allow_empty = False
+    # allow_empty = False
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
         if self.kwargs['category_slug'] != 'index':
             context['title'] = LastCategories.objects.get(slug=self.kwargs['category_slug']).name
+            context['selected_cat'] = LastCategories.objects.get(slug=self.kwargs['category_slug']).sub_cat_id
+            print(LastCategories.objects.get(slug=self.kwargs['category_slug']).sub_cat)
         else:
             context['title'] = 'Категории товаров'
 
@@ -63,7 +65,7 @@ def about(request):
     else:
         form = AddProductForm()
 
-    return render(request, 'mainsite/about.html', {'from': form, 'title': 'О данном сайте'})
+    return render(request, 'mainsite/about.html', {'form': form, 'title': 'О данном сайте'})
 
 
 
