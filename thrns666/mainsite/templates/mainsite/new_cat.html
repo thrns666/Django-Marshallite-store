@@ -18,11 +18,40 @@
                                         {% if sub.main_cat_id == main.pk%}
                                             <ul>
                                                 <li>
-                                                    {% if selected_cat == sub.id %}
+                                                    {% if selected_cat.sub_cat_id == sub.id %}
                                                       <details open>
+                                                          <summary>{{ sub.name }}</summary>
+                                                        {% if main.pk == sub.main_cat_id %}
+                                                          {% last_cats as l_cats %}
+                                                          {% for last in l_cats %}
+                                                            {% if last.sub_cat_id == sub.pk %}
+                                                            <ul>
+                                                              {% if last.name == selected_cat.name %}
+                                                              <li><a>{{ last.name }}</a></li>
+                                                              {% else %}
+                                                              <li><a href="{{ last.get_absolute_url }}">{{ last.name }}</a></li>
+                                                              {% endif %}
+                                                            </ul>
+                                                            {% endif %}
+                                                          {% endfor %}
+                                                        {% endif %}
                                                     {% else %}
                                                       <details>
+                                                          <summary>{{ sub.name }}</summary>
+                                                        {% if main.pk == sub.main_cat_id %}
+                                                          {% last_cats as l_cats %}
+                                                          {% for last in l_cats %}
+                                                            {% if last.sub_cat_id == sub.pk %}
+                                                            <ul>
+                                                              <li><a href="{{ last.get_absolute_url }}">{{ last.name }}</a></li>
+                                                            </ul>
+                                                            {% endif %}
+                                                          {% endfor %}
+                                                        {% endif %}
+
                                                     {% endif %}
+
+                                                       <!--   #3##3
                                                         <summary>{{ sub.name }}</summary>
                                                         {% if main.pk == sub.main_cat_id %}
                                                           {% last_cats as l_cats %}
@@ -34,9 +63,11 @@
                                                             {% endif %}
                                                           {% endfor %}
                                                         {% endif %}
+                                                          #3##3 -->
+
                                                       </details>
-                                                    </li>
-                                                </ul>
+                                                </li>
+                                            </ul>
                                             {% endif %}
                                         {% endfor %}
                                 </details>

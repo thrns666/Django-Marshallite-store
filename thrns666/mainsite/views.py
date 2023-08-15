@@ -30,7 +30,7 @@ class CatalogProducts(ListView):
 
         if self.kwargs['category_slug'] != 'index':
             context['title'] = LastCategories.objects.get(slug=self.kwargs['category_slug']).name
-            context['selected_cat'] = LastCategories.objects.get(slug=self.kwargs['category_slug']).sub_cat_id
+            context['selected_cat'] = LastCategories.objects.get(slug=self.kwargs['category_slug'])
             print(LastCategories.objects.get(slug=self.kwargs['category_slug']).sub_cat)
         else:
             context['title'] = 'Категории товаров'
