@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 
 from .models import *
 from .forms import *
+from .utils import DataMixin
 
 
 # Create your views here.
@@ -44,7 +45,7 @@ class CatalogProducts(ListView):
             return ''
 
 
-class ProductPage(DetailView):
+class ProductPage(DataMixin, DetailView):
     model = Product
     template_name = 'mainsite/product_page.html'
     context_object_name = 'product'
@@ -67,7 +68,15 @@ def about(request):
 
     return render(request, 'mainsite/about.html', {'form': form, 'title': 'О данном сайте'})
 
+class BotPage(DataMixin, ListView):
+    model = Product
 
+    template_name = 'mainsite/bot_page.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'foot'
+        return context
 
 
 

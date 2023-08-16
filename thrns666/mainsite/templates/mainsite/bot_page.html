@@ -4,8 +4,8 @@
 <h1>{{ title }}</h1>
 <table>
   <tr><th>Название</th><th>Описание</th><th>Дата</th></tr>
-  {% for i in db_obj%}
-  <tr><th>{{ i.title }}</th><th>{{ i.description }}</th><th>{{ i.date }}</th></tr>
+  {% for i.item in footer.item %}
+  <tr><th>{{ i }}</th><th>{{ v }}</th><th>5</th></tr>
   {% endfor %}
 </table>
-{% endblock %}
+{% endblock content%}
