@@ -104,12 +104,15 @@
             <div class="container-fluid mb-auto">
                 <div class="row">
                     <div class="col-md-3 col-6">
-                        <h4>Информация</h4>
+                        {% for name_column in footer_first_col.keys %}
+                        <h4>{{name_column}}</h4>
+                        {% endfor %}
                         <ul class="list-unstyled">
-                            <li><a href="#">Вакансии</a></li>
-                            <li><a href="#">Доставка</a></li>
-                            <li><a href="#">Оплата</a></li>
-                            <li><a href="#">Прессе</a></li>
+                            {% for title in footer_first_col.values %}
+                            {% for data_dict in title %}
+                            <li><a href="{{ data_dict.link }}">{{ data_dict.title }}</a></li>
+                            {% endfor %}
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="col-md-3 col-6">
@@ -124,7 +127,7 @@
                     <div class="col-md-3 col-6">
                         <h4>Контакты</h4>
                         <ul class="list-unstyled">
-                            <li><a href="tel:375123456789">MTC +375 (12) 345-67-89</a></li>
+                            <li><a href="tel:375123456789"></a></li>
                             <li><a href="tel:375123456789">A1 +375 (33) 345-67-89</a></li>
                             <li><a href="tel:375123456789">Life +375 (55) 345-67-89</a></li>
                         </ul>

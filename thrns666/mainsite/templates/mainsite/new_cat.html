@@ -50,21 +50,6 @@
                                                         {% endif %}
 
                                                     {% endif %}
-
-                                                       <!--   #3##3
-                                                        <summary>{{ sub.name }}</summary>
-                                                        {% if main.pk == sub.main_cat_id %}
-                                                          {% last_cats as l_cats %}
-                                                          {% for last in l_cats %}
-                                                            {% if last.sub_cat_id == sub.pk %}
-                                                            <ul>
-                                                              <li><a href="{{ last.get_absolute_url }}">{{ last.name }}</a></li>
-                                                            </ul>
-                                                            {% endif %}
-                                                          {% endfor %}
-                                                        {% endif %}
-                                                          #3##3 -->
-
                                                       </details>
                                                 </li>
                                             </ul>
@@ -83,7 +68,7 @@
         <div class="col-md-2">
             <div class="product-card">
                 <div class="product-thumb">
-                {% if i.photo %}
+                {% if i.photo %}<!--<tr><th>{{ i }}</th><th>{{ a }}</th><th>5</th></tr>-->
                     <img src="{{i.photo.url}}">
                 {% endif %}
                 </div>

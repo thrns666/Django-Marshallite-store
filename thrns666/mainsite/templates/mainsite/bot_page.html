@@ -4,8 +4,12 @@
 <h1>{{ title }}</h1>
 <table>
   <tr><th>Название</th><th>Описание</th><th>Дата</th></tr>
-  {% for i.item in footer.item %}
-  <tr><th>{{ i }}</th><th>{{ v }}</th><th>5</th></tr>
+  {% for i in footer %}
+  <tr><td>{{i}}</td><td>3</td><td>5</td></tr>
   {% endfor %}
 </table>
+
+<!--<tr><th>{{ i }}</th><th>{{ a }}</th><th>5</th></tr>-->
+
+
 {% endblock content%}
