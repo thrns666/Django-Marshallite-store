@@ -105,7 +105,7 @@
                 <div class="row">
                     <div class="col-md-3 col-6">
                         {% for name_column in footer_first_col.keys %}
-                        <h4>{{name_column}}</h4>
+                        <h4>{{ name_column }}</h4>
                         {% endfor %}
                         <ul class="list-unstyled">
                             {% for title in footer_first_col.values %}
@@ -116,26 +116,39 @@
                         </ul>
                     </div>
                     <div class="col-md-3 col-6">
-                        <h4>Время работы</h4>
+                        <h4>{{ footer_second_col.column_name }}</h4>
                         <ul class="list-unstyled">
-                            <li>Пн-Вс</li>
-                            <li>9:00 - 21:00</li>
-                            <li>Без перерывов</li>
-                            <li>г.Минск, ул. Пушкина, строение 55</li>
+                            <li>{{ footer_second_col.days }}</li>
+                            <li>{{ footer_second_col.worktime }}</li>
+                            <li>{{ footer_second_col.break }}</li>
+                            <li>{{ footer_second_col.adress }}</li>
                         </ul>
                     </div>
                     <div class="col-md-3 col-6">
-                        <h4>Контакты</h4>
+                        {% for name_column in footer_third_col.keys %}
+                        <h4>{{ name_column }}</h4>
+                        {% endfor %}
                         <ul class="list-unstyled">
-                            <li><a href="tel:375123456789"></a></li>
-                            <li><a href="tel:375123456789">A1 +375 (33) 345-67-89</a></li>
-                            <li><a href="tel:375123456789">Life +375 (55) 345-67-89</a></li>
+                            {% for title in footer_third_col.values %}
+                            {% for data_dict in title %}
+                            <li><a href="tel:{{ data_dict.phone }}">{{data_dict.operator}}   {{ data_dict.phone }}</a></li>
+                            {% endfor %}
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="col-md-3 col-6">
-                        <h4>Мы в сети</h4>
+                        {% for name_column in footer_fourth_col.keys %}
+                        <h4>{{ name_column }}</h4>
+                        {% endfor %}
                         <ul class="list-unstyled">
-                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a>   <a href="#"><i class="fa-brands fa-telegram"></i></a>   <a href="#"><i class="fa-brands fa-viber"></i></a></li>
+
+                            <li>
+                                {% for data_values in footer_fourth_col.values  %}
+                                {% for data in data_values %}
+                                <a href="{{ data.link }}"><i class="{{ data.icon }}"></i></a>
+                                {% endfor %}
+                                {% endfor %}
+                            </li>
                         </ul>
                     </div>
                 </div>

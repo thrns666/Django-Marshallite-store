@@ -8,19 +8,20 @@ from .utils import DataMixin
 
 
 # Create your views here.
-class HomePage(ListView):
+class HomePage(DataMixin, ListView):
     model = Slider
     template_name = 'mainsite/index.html'
     context_object_name = 'slides'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Интернет-магазин Marshalite'
-        return context
+        c_def = self.get_user_context(title='Интернет-магазин Marshalite')
+        context = {**context, **c_def}
+        return context # context | c_def if python ver >= 3.9
 
 
 
-class CatalogProducts(ListView):
+class CatalogProducts(DataMixin, ListView):
     model = Product
     template_name = 'mainsite/new_cat.html'
     context_object_name = 'db_products'
@@ -30,12 +31,12 @@ class CatalogProducts(ListView):
         context = super().get_context_data(**kwargs)
 
         if self.kwargs['category_slug'] != 'index':
-            context['title'] = LastCategories.objects.get(slug=self.kwargs['category_slug']).name
-            context['selected_cat'] = LastCategories.objects.get(slug=self.kwargs['category_slug'])
+            c_def = self.get_user_context(title=LastCategories.objects.get(slug=self.kwargs['category_slug']).name, selected_cat=LastCategories.objects.get(slug=self.kwargs['category_slug']))
             print(LastCategories.objects.get(slug=self.kwargs['category_slug']).sub_cat)
         else:
-            context['title'] = 'Категории товаров'
+            c_def = self.get_user_context(title='Категории товаров')
 
+        context = {**context, **c_def}
         return context
 
     def get_queryset(self):
@@ -53,7 +54,9 @@ class ProductPage(DataMixin, DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = context['product']
+        c_def = self.get_user_context(title=context['product'])
+        print(context)
+        context = {**context, **c_def}
         return context
 
 
@@ -77,7 +80,8 @@ class BotPage(DataMixin, ListView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='footerok')
         print(context)
-        return dict(list(context.items()) + list(c_def.items()))
+        context = {**context, **c_def}
+        return context
 
 
 
