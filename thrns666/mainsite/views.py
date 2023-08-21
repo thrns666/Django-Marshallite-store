@@ -9,6 +9,7 @@ from .utils import DataMixin
 
 # Create your views here.
 class HomePage(DataMixin, ListView):
+
     model = Slider
     template_name = 'mainsite/index.html'
     context_object_name = 'slides'
@@ -22,6 +23,7 @@ class HomePage(DataMixin, ListView):
 
 
 class CatalogProducts(DataMixin, ListView):
+    paginate_by = 15
     model = Product
     template_name = 'mainsite/new_cat.html'
     context_object_name = 'db_products'
