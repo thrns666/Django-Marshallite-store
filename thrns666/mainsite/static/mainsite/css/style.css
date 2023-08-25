@@ -438,3 +438,19 @@ body {
     margin-left: 1px;
     min-height: 500px;
 }
+
+/* Pagination */
+
+--#{$prefix}pagination-padding-x: #{$pagination-padding-x};
+--#{$prefix}pagination-padding-y: #{$pagination-padding-y};
+@include rfs($pagination-font-size, --#{$prefix}pagination-font-size);
+--#{$prefix}pagination-color: #{$pagination-color};
+--#{$prefix}pagination-bg: #{$pagination-bg};
+--#{$prefix}pagination-border-width: #{$pagination-border-width};
+--#{$prefix}pagination-border-color: #{$pagination-border-color};
+--#{$prefix}pagination-border-radius: #{$pagination-border-radius};
+--#{$prefix}pagination-hover-color: #{$pagination-hover-color};
+--#{$prefix}pagination-hover-bg: #{$pagination-hover-bg};
+--#{$prefix}pagination-hover-border-color: #{$pagination-hover-border-color};
+
+/* end of pagination */
