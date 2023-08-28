@@ -98,45 +98,62 @@
 {% block content%}
 {% endblock content %}
 
+{% if page_obj.has_other_pages %}
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
-    <li class="page-item disabled">
-      <a class="page-link">Previous</a>
-    </li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    {% if page_obj.has_previous %}
     <li class="page-item">
-      <a class="page-link" href="#">Next</a>
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}"><i class="fa-solid fa-circle-left"></i></a>
     </li>
-  </ul>
-</nav>
-
-
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    {% for i in page_obj.page_range %}
-    <li class="page-item">
-      {% if i.has_previous %}
-      <a class="page-link" href="?page={{ i.previous_page_number }}" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-      {% else %}
-      <a class="page-link" href="" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      {% endif %}
+    {% else %}
+      <li class="page-item disabled">
+      <a class="page-link" href="#"><i class="fa-solid fa-circle-left"></i></a>
     </li>
+    {% endif %}
+    {% for i in paginator.page_range %}
+    {% if i == page_obj.number %}
     <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-
+    {% elif i <= page_obj.number|add:2 and i >= page_obj.number|add:-2 %}
+    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
     <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}"><i class="fa-solid fa-circle-right"></i></a>
     </li>
-  {% endfor %}
+    {% else %}
+      <li class="page-item disabled">
+      <a class="page-link" href="#"><i class="fa-solid fa-circle-right"></i></a>
+    </li>
+    {% endif %}
+
   </ul>
 </nav>
+{% endif %}
+
+
+<!--<nav aria-label="Page navigation example">-->
+<!--  <ul class="pagination">-->
+<!--    {% for i in page_obj.page_range %}-->
+<!--    <li class="page-item">-->
+<!--      {% if i.has_previous %}-->
+<!--      <a class="page-link" href="?page={{ i.previous_page_number }}" aria-label="Previous">-->
+<!--        <span aria-hidden="true">&laquo;</span>-->
+<!--      </a>-->
+<!--      {% else %}-->
+<!--      <a class="page-link" href="" aria-label="Previous">-->
+<!--        <span aria-hidden="true">&laquo;</span>-->
+<!--      {% endif %}-->
+<!--    </li>-->
+<!--    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>-->
+<!--    <li class="page-item">-->
+<!--        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">-->
+<!--        <span aria-hidden="true">&raquo;</span>-->
+<!--      </a>-->
+<!--    </li>-->
+<!--  {% endfor %}-->
+<!--  </ul>-->
+<!--</nav>-->
 
 
 {% block footer %}

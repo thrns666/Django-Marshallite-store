@@ -23,7 +23,7 @@ class HomePage(DataMixin, ListView):
 
 
 class CatalogProducts(DataMixin, ListView):
-    paginate_by = 7
+    paginate_by = 10
     model = Product
     template_name = 'mainsite/new_cat.html'
     context_object_name = 'db_products'
