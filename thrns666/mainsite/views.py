@@ -86,6 +86,17 @@ class BotPage(DataMixin, ListView):
         return context
 
 
+class LogInUser(DataMixin, CreateView):
+    form_class = RegisterUserForm
+    template_name = 'mainsite/login.html'
+    success_url = reverse_lazy('login')
+
+    def get_user_context_data(self, *, objects_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
+        return {**context, **c_def}
+
+
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'mainsite/register.html'

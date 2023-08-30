@@ -8,6 +8,6 @@ urlpatterns = [
     path('bot/', BotPage.as_view(), name='testfooter'),
     path('catalog/<slug:category_slug>/', CatalogProducts.as_view(), name='catalog'),
     path('product/<slug:product_slug>/', ProductPage.as_view(), name='product'),
-    # path('login/, ')
+    path('login/', LogInUser.as_view(), name='login'),
     path('register/', RegisterUser.as_view(), name='register')
 ]
