@@ -183,26 +183,12 @@
                 </ul>
                 <span class="description">или используя почту:</span>
                 <form class="form-horizontal">
-                    <div class="form-group">
-                        <input type="first_name" class="form-control" placeholder="Имя">
-                    </div>
-                    <div class="form-group">
-                        <input type="las" class="form-control" placeholder="Фамилия">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Почта">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Пароль">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="Подтвердите пароль">
-                    </div>
-                    <div class="form-group">
-                        <input type="checkbox" class="checkbox">
-                        <span class="check-label">Я согласен с <a href="#">условиями</a> и <a href="#">политикой обработки данных</a></span>
-                    </div>
-                    <button class="btn signup">Регистрация</button>
+                    {% for f in form %}
+                    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+                    <div class="form-error">{{ f.errors }}</div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn signup">Регистрация</button>
                 </form>
             </div>
         </div>

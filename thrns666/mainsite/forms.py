@@ -6,12 +6,22 @@ from .models import *
 from django.core.exceptions import ValidationError
 
 
+# class
+
+
 class RegisterUserForm(UserCreationForm):
+    first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    email = forms.CharField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2')
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2')
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'password1': forms.PasswordInput(attrs={'class': 'form-control'}),
             'password2': forms.PasswordInput(attrs={'class': 'form-control'})
         }
@@ -25,8 +35,8 @@ class AddProductForm(forms.ModelForm):
         model = Product
         fields = ['title', 'photo', 'description', 'price', 'availability', 'cat', 'slug']
         widgets = {
-            'title' : forms.TextInput(attrs={'class' : 'form-input'}),
-            'description' : forms.Textarea(attrs={'cols' : 60, 'rows' : 10})
+            'title': forms.TextInput(attrs={'class' : 'form-input'}),
+            'description': forms.Textarea(attrs={'cols' : 60, 'rows' : 10})
         }
 
     def clean_title(self):
