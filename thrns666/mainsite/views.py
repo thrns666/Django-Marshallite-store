@@ -1,3 +1,5 @@
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
@@ -18,8 +20,8 @@ class HomePage(DataMixin, ListView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Интернет-магазин Marshalite')
         context = {**context, **c_def}
-        return context # context | c_def if python ver >= 3.9
-
+        return context
+        # context | c_def if python ver >= 3.9
 
 
 class CatalogProducts(DataMixin, ListView):
@@ -27,7 +29,6 @@ class CatalogProducts(DataMixin, ListView):
     model = Product
     template_name = 'mainsite/new_cat.html'
     context_object_name = 'db_products'
-    # allow_empty = False
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,6 +74,7 @@ def about(request):
 
     return render(request, 'mainsite/about.html', {'form': form, 'title': 'О данном сайте'})
 
+
 class BotPage(DataMixin, ListView):
     model = Product
 
@@ -86,14 +88,13 @@ class BotPage(DataMixin, ListView):
         return context
 
 
-class LogInUser(DataMixin, CreateView):
-    form_class = RegisterUserForm
+class LogInUser(DataMixin, LoginView):
+    authentication_form = LoginUserForm
     template_name = 'mainsite/login.html'
-    success_url = reverse_lazy('homepage')
 
     def get_user_context_data(self, *, objects_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context()
+        c_def = self.get_user_context(title='Авторизация')
         return {**context, **c_def}
 
 
@@ -106,6 +107,3 @@ class RegisterUser(DataMixin, CreateView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context()
         return {**context, **c_def}
-
-
-
