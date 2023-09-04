@@ -78,12 +78,27 @@
               </div>
             </div>
         </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'homepage'%}">{{user.first_name}} -></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#"  data-bs-toggle="dropdown"><i class="fa-regular fa-user"></i></a>
+
+
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="">Личный кабинет</a></li>
+                <li><a class="dropdown-item" href="">Обратная связь</a></li>
+                <li><a class="dropdown-item" href="">Выйти</a></li>
+            </ul>
+          {% else %}
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#"  data-bs-toggle="dropdown"><i class="fa-regular fa-user"></i></a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{% url 'login' %}">Войти</a></li>
             <li><a class="dropdown-item" href="#">Обратная связь</a></li>
           </ul>
+          {% endif %}
         </li>
       </ul>
     </div>

@@ -7,22 +7,23 @@ from django.core.exceptions import ValidationError
 
 
 class LoginUserForm(AuthenticationForm):
-    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'}))
+    username = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
     class Meta:
-        fields = ('email', 'password')
+        fields = ('username', 'password')
 
 
 
 class RegisterUserForm(UserCreationForm):
-    username = forms.CharField(label='Имя Фамилия', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    username = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'}))
+    first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}))
+    last_name = forms.CharField(label='Фамилия', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Фамилия'}))
+    password1 = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
+    password2 = forms.CharField(label='Повтор пароля', widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Повтор пароля'}))
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'username')
+        fields = ('first_name', 'last_name', 'username', 'password1', 'password2')
 
 
 class AddProductForm(forms.ModelForm):
@@ -33,8 +34,8 @@ class AddProductForm(forms.ModelForm):
         model = Product
         fields = ['title', 'photo', 'description', 'price', 'availability', 'cat', 'slug']
         widgets = {
-            'title': forms.TextInput(attrs={'class' : 'form-input'}),
-            'description': forms.Textarea(attrs={'cols' : 60, 'rows' : 10})
+            'title': forms.TextInput(attrs={'class': 'form-input'}),
+            'description': forms.Textarea(attrs={'cols': 60, 'rows': 10})
         }
 
     def clean_title(self):

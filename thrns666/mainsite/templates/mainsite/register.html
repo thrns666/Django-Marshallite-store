@@ -77,7 +77,7 @@
     height: 40px;
     padding: 6px 12px;
     border-radius: 5px;
-    border: 2px solid #F2F5F6;
+    border: 2px solid #c5c5c5;
     box-shadow: none;
 }
 .form-horizontal .form-control:focus{
@@ -85,7 +85,7 @@
     box-shadow: none;
 }
 .form-horizontal .form-control::placeholder{
-    color: #e1e1e1;
+    color: #999999;
     font-size: 14px;
     font-weight: 300;
 }
@@ -145,16 +145,16 @@
     font-weight: 600;
     letter-spacing: 0.5px;
     text-transform: capitalize;
-    width: 130px;
+    width: 170px;
     padding: 11px;
     margin: 0 10px 10px 0;
-    border: 2px solid #4E4C97;
+    border: 2px solid #414146;
     border-radius: 15px;
     display: inline-block;
     transition: all 0.3s ease 0s;
 }
 .form-horizontal .btn.signin{
-    color: #4E4C97;
+    color: #414146;
     background-color: #fff;
 }
 .form-horizontal .btn:hover,
@@ -170,29 +170,45 @@
 }
 </style>
 
-<form  method="post">
-    {% csrf_token %}
-    <div class="container-fluid">
-        <div class="offset-md-4 col-md-4 offset-sm-3 col-sm-6">
-            <div class="form-container">
-                <h3 class="title">Зарегистрироваться</h3>
-                <ul class="social-links">
-                    <li><a href=""><i class="fab fa-google"></i></a></li>
-                    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                </ul>
-                <span class="description">или используя почту:</span>
-                <form class="form-horizontal">
-                    {% for f in form %}
-                    <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
-                    <div class="form-error">{{ f.errors }}</div>
-                    {% endfor %}
-                    <button type="submit" class="btn signup">Регистрация</button>
-                </form>
-            </div>
+<div class="container-fluid">
+    <div class="offset-md-4 col-md-4 offset-sm-3 col-sm-6">
+        <div class="form-container">
+            <h3 class="title">Регистрация</h3>
+            <ul class="social-links">
+                <li><a href=""><i class="fab fa-google"></i></a></li>
+                <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href=""><i class="fab fa-twitter"></i></a></li>
+            </ul>
+            <span class="description">или используя почту:</span>
+            <form method="post" class="form-horizontal">
+                {% csrf_token %}
+                <div class="form-group">
+                    <p>{{form.username}}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{form.first_name}}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{form.last_name}}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{form.password1}}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{form.password2}}</p>
+                </div>
+                <div class="form-group">
+                    <span class="check-label">{{form.non_field_errors}}</span>
+                </div>
+                <button type="submit" class="btn signin">Зарегистрироваться</button>
+            </form>
         </div>
     </div>
-</form>
+</div>
+
+
+
+
 {% endblock content %}
 
 {% block footer %}
