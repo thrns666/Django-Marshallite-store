@@ -13,7 +13,6 @@ class LoginUserForm(AuthenticationForm):
         fields = ('username', 'password')
 
 
-
 class RegisterUserForm(UserCreationForm):
     username = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'}))
     first_name = forms.CharField(label='Имя', widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Имя'}))

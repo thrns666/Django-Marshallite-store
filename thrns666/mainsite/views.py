@@ -1,5 +1,5 @@
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
@@ -75,14 +75,13 @@ def about(request):
     return render(request, 'mainsite/about.html', {'form': form, 'title': 'О данном сайте'})
 
 
-class BotPage(DataMixin, ListView):
-    model = Product
-
-    template_name = 'mainsite/bot_page.html'
+class PasswordResetUser(DataMixin, PasswordResetView):
+    form_class = PasswordResetForm
+    template_name = 'mainsite/password_reset.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='footerok')
+        c_def = self.get_user_context()
         print(context)
         context = {**context, **c_def}
         return context
@@ -96,6 +95,14 @@ class LogInUser(DataMixin, LoginView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Авторизация')
         return {**context, **c_def}
+
+class LogoutUser(DataMixin, LogoutView):
+
+    def get_user_context_data(self, *, objects_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context()
+        return {**context, **c_def}
+
 
 
 class RegisterUser(DataMixin, CreateView):
