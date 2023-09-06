@@ -8,12 +8,12 @@
             <div class="catalog">
                 <ul class="tree-padding tree-vertical-lines tree-horizontal-lines tree-summaries tree-markers tree-buttons">
                     <li>
-                        {% main_cats as m_cat %}
-                        {% for main in m_cat %}
+
+                        {% for main in m_cats %}
                             <li>
                             <details open>
                                 <summary>{{ main.name }}</summary>
-                                    {% sub_cats as s_cats %}
+
                                     {% for sub in s_cats %}
                                         {% if sub.main_cat_id == main.pk%}
                                             <ul>
@@ -22,7 +22,7 @@
                                                       <details open>
                                                           <summary>{{ sub.name }}</summary>
                                                         {% if main.pk == sub.main_cat_id %}
-                                                          {% last_cats as l_cats %}
+
                                                           {% for last in l_cats %}
                                                             {% if last.sub_cat_id == sub.pk %}
                                                             <ul>
@@ -39,7 +39,7 @@
                                                       <details>
                                                           <summary>{{ sub.name }}</summary>
                                                         {% if main.pk == sub.main_cat_id %}
-                                                          {% last_cats as l_cats %}
+
                                                           {% for last in l_cats %}
                                                             {% if last.sub_cat_id == sub.pk %}
                                                             <ul>
@@ -69,7 +69,7 @@
             <div class="product-card">
                 <div class="product-thumb">
                 {% if i.photo %}<!--<tr><th>{{ i }}</th><th>{{ a }}</th><th>5</th></tr>-->
-                    <img src="{{i.photo.url}}">
+                    <img href="{{ i.get_absolute_url }}" src="{{i.photo.url}}">
                 {% endif %}
                 </div>
                 <div class="product-details">

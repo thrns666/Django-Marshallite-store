@@ -30,14 +30,21 @@ class CatalogProducts(DataMixin, ListView):
     template_name = 'mainsite/new_cat.html'
     context_object_name = 'db_products'
 
+
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        m_cats = MainCategories.objects.all()
+        s_cats = SubCategories.objects.all()
+        l_cats = LastCategories.objects.all()
+
         if self.kwargs['category_slug'] != 'index':
-            c_def = self.get_user_context(title=LastCategories.objects.get(slug=self.kwargs['category_slug']).name, selected_cat=LastCategories.objects.get(slug=self.kwargs['category_slug']))
-            print(LastCategories.objects.get(slug=self.kwargs['category_slug']).sub_cat)
+            l_cats_category_slug_obj = LastCategories.objects.get(slug=self.kwargs['category_slug'])
+            c_def = self.get_user_context(title=l_cats_category_slug_obj.name, selected_cat=l_cats_category_slug_obj, m_cats=m_cats, s_cats=s_cats, l_cats=l_cats)
+            print(c_def['title'])
         else:
-            c_def = self.get_user_context(title='Категории товаров')
+            c_def = self.get_user_context(title='Категории товаров', m_cats=m_cats, s_cats=s_cats, l_cats=l_cats)
 
         context = {**context, **c_def}
         return context
