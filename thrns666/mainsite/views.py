@@ -1,11 +1,8 @@
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-
-
-from .models import *
 from .forms import *
 from .utils import DataMixin
 
@@ -30,8 +27,6 @@ class CatalogProducts(DataMixin, ListView):
     model = Product
     template_name = 'mainsite/new_cat.html'
     context_object_name = 'db_products'
-
-
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -104,13 +99,13 @@ class LogInUser(DataMixin, LoginView):
         c_def = self.get_user_context(title='Авторизация')
         return {**context, **c_def}
 
+
 class LogoutUser(DataMixin, LogoutView):
 
     def get_user_context_data(self, *, objects_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context()
         return {**context, **c_def}
-
 
 
 class RegisterUser(DataMixin, CreateView):
@@ -123,49 +118,57 @@ class RegisterUser(DataMixin, CreateView):
         c_def = self.get_user_context()
         return {**context, **c_def}
 
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 
-@login_required(login_url="/users/login")
+
+@login_required(login_url="/login")
 def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
+    cart.total_sum()
     return redirect("homepage")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login")
 def item_clear(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.remove(product)
+    cart.total_sum()
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login")
 def item_increment(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
+    cart.total_sum()
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login")
 def item_decrement(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.decrement(product=product)
+    cart.total_sum()
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login")
 def cart_clear(request):
     cart = Cart(request)
     cart.clear()
     return redirect("cart_detail")
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/login")
 def cart_detail(request):
-    return render(request, 'cart/cart_detail.html')
+    print(Cart(request).cart)
+    return render(request, 'mainsite/about.html')
+

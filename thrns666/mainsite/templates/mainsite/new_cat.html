@@ -80,7 +80,7 @@
                             <small>27.88 руб.</small> {{i.price}}
                         </div>
                         <div class="product-links">
-                            <a href="url 'cart_add' product.id"><i class="fa-solid fa-basket-shopping"></i></a>
+                            <a href="{% url 'cart_add' id=i.id %}"><i class="fa-solid fa-basket-shopping"></i></a>
                             <a href="#"><i class="fa-regular fa-heart"></i></a>
                         </div>
                     </div>

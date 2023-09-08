@@ -1,9 +1,16 @@
 {% extends 'mainsite/base.html' %}
+{% load cart_tag %}
+
 
 {% block content %}
-<form action="{% url 'about' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ from.as_p }}
-    <button type="submit">Add</button>
-</form>
+
+{% for k, v in request.session.cart.items %}
+<p>{{v.name}}</p>
+<p>{{v.price}}</p>
+<p>{{v.quantity}}</p>
+<p>{{v.image}}</p>
+<p>{{v.total_price}}</p>
+
+{% endfor %}
+
 {% endblock content %}

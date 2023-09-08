@@ -16,6 +16,10 @@ register = template.Library()
 # def get_last_cats():
 #     return LastCategories.objects.all()
 
+@register.filter(name='multiply')
+def multiply(value, arg):
+    return value * arg
+
 @register.simple_tag(name='bootstrap_link_token')
 def get_bootstrap_token():
     return bootstrap_link_integrity

@@ -1,5 +1,6 @@
 {% load static %}
 {% load mainsite_tags %}
+{% load cart_tag %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 top-menu">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{% url 'homepage'%}">Главная страница</a>
+          <a class="nav-link" aria-current="page" href="{% url 'homepage' %}">Главная страница</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'catalog' category_slug='index' %}">Каталог</a>
@@ -45,6 +46,7 @@
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
         </li>
+<!--          start cart-->
         <li class="nav-item">
             <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cart-modal">
                 <i class="fa-solid fa-basket-shopping"></i>
@@ -59,16 +61,27 @@
                   <div class="modal-body">
                     <table class="table">
                       <tbody>
+
+<!--                      item start-->
+                        {% for k, v in request.session.cart.items %}
                         <tr>
-                          <td><img src="static/mainsite/img/wood.jpg" alt=""></td>
-                            <td><a href="#">Щит мебельный березовый склеенный<br>шлифованный 22 мм 22х100х1000</a></td>
-                          <td>1 шт.</td>
-                            <td>
-                                11.79 р.
-                            </td>
+                          <td><img src="{{v.image}}" alt="{{v.name}}"></td>
+                            <td><a href="#">{{v.name}}</a></td>
+                          <td>{{ v.quantity }}шт.</td>
+                            <td>{{ v.price }} руб.</td>
+                            {% if v.quantity > 1%}
+                            <td>Итого: {{v.total_price}} руб.</td>
+                            {% endif %}
+
                         </tr>
+                        {% endfor %}
+<!--                      item end-->
+                      <tr>
+                          <td> {{request.session.cart['glob_price']}} </td>
+                      </tr>
                       </tbody>
                     </table>
+
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
@@ -78,9 +91,10 @@
               </div>
             </div>
         </li>
+<!--          end cart-->
         {% if request.user.is_authenticated %}
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="{% url 'homepage'%}">{{user.first_name}}</a>
+          <a class="nav-link" aria-current="page" href="{% url 'homepage' %}">{{user.first_name}}</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#"  data-bs-toggle="dropdown"><i class="fa-regular fa-user"></i></a>
