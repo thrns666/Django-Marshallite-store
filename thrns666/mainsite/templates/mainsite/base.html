@@ -65,6 +65,7 @@
 <!--                      item start-->
                         {% for k, v in request.session.cart.items %}
                         <tr>
+                          {% if k != 'glob_price' %}
                           <td><img src="{{v.image}}" alt="{{v.name}}"></td>
                             <td><a href="#">{{v.name}}</a></td>
                           <td>{{ v.quantity }}шт.</td>
@@ -72,13 +73,13 @@
                             {% if v.quantity > 1%}
                             <td>Итого: {{v.total_price}} руб.</td>
                             {% endif %}
-
+                          {% endif %}
                         </tr>
                         {% endfor %}
 <!--                      item end-->
-                      <tr>
-                          <td> {{request.session.cart['glob_price']}} </td>
-                      </tr>
+                        <tr>
+                          <td> {{request.session.context.total_sum_amount}} </td>
+                        </tr>
                       </tbody>
                     </table>
 

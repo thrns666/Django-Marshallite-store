@@ -3,8 +3,10 @@ from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.decorators import login_required
 from .forms import *
 from .utils import DataMixin
+from cart.cart import Cart
 
 
 # Create your views here.
@@ -119,9 +121,8 @@ class RegisterUser(DataMixin, CreateView):
         return {**context, **c_def}
 
 
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from cart.cart import Cart
+
+
 
 
 @login_required(login_url="/login")
@@ -129,7 +130,7 @@ def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
-    cart.total_sum()
+    # cart.total_sum()
     return redirect("homepage")
 
 
@@ -138,7 +139,7 @@ def item_clear(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.remove(product)
-    cart.total_sum()
+    # cart.total_sum()
     return redirect("cart_detail")
 
 
@@ -147,7 +148,7 @@ def item_increment(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
-    cart.total_sum()
+    # cart.total_sum()
     return redirect("cart_detail")
 
 
@@ -156,7 +157,7 @@ def item_decrement(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.decrement(product=product)
-    cart.total_sum()
+    # cart.total_sum()
     return redirect("cart_detail")
 
 
@@ -169,6 +170,6 @@ def cart_clear(request):
 
 @login_required(login_url="/login")
 def cart_detail(request):
-    print(Cart(request).cart)
+    print(Cart(request).cart, 'views')
     return render(request, 'mainsite/about.html')
 
