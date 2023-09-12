@@ -130,7 +130,7 @@ def cart_add(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
-    # cart.total_sum()
+    print(request.session.items())
     return redirect("homepage")
 
 
