@@ -69,15 +69,15 @@ class ProductPage(DataMixin, DetailView):
 
 
 def about(request):
-    if request.method == 'POST':
-        form = AddProductForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('homepage')
-    else:
-        form = AddProductForm()
+    # if request.method == 'POST':
+    #     form = AddProductForm(request.POST, request.FILES)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('homepage')
+    # else:
+    #     form = AddProductForm()
 
-    return render(request, 'mainsite/about.html', {'form': form, 'title': 'О данном сайте'})
+    return render(request, 'mainsite/about.html', {'title': 'О данном сайте'})
 
 
 class PasswordResetUser(DataMixin, PasswordResetView):
@@ -131,7 +131,8 @@ def cart_add(request, id):
     product = Product.objects.get(id=id)
     cart.add(product=product)
     print(request.session.items())
-    return redirect("homepage")
+    print(request.META)
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url="/login")
@@ -139,8 +140,7 @@ def item_clear(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.remove(product)
-    # cart.total_sum()
-    return redirect("cart_detail")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url="/login")
@@ -148,8 +148,7 @@ def item_increment(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.add(product=product)
-    # cart.total_sum()
-    return redirect("cart_detail")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url="/login")
@@ -157,16 +156,14 @@ def item_decrement(request, id):
     cart = Cart(request)
     product = Product.objects.get(id=id)
     cart.decrement(product=product)
-    # cart.total_sum()
-    return redirect("cart_detail")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required(login_url="/login")
 def cart_clear(request):
     cart = Cart(request)
     cart.clear()
-    return redirect("cart_detail")
-
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url="/login")
 def cart_detail(request):
