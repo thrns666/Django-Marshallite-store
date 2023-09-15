@@ -67,6 +67,23 @@ class ProductPage(DataMixin, DetailView):
         context = {**context, **c_def}
         return context
 
+class UserProfile(ListView, DataMixin):
+    model = '!!!WARN!!!'
+    template_name = 'mainsite/account_page.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        l_cats_category_slug_obj = LastCategories.objects.get(slug=self.kwargs['category_slug'])
+        c_def = self.get_user_context(title=l_cats_category_slug_obj.name, selected_cat=l_cats_category_slug_obj, m_cats=m_cats, s_cats=s_cats, l_cats=l_cats)
+        context = {**context, **c_def}
+        return context
+
+    def get_queryset(self):
+        return Product.objects.filter(cat_id__slug=self.kwargs['category_slug']) # !!!WARN!!!
+
+
+
 
 def about(request):
     # if request.method == 'POST':
@@ -121,10 +138,6 @@ class RegisterUser(DataMixin, CreateView):
         return {**context, **c_def}
 
 
-
-
-
-
 @login_required(login_url="/login")
 def cart_add(request, id):
     cart = Cart(request)
@@ -165,8 +178,8 @@ def cart_clear(request):
     cart.clear()
     return redirect(request.META.get('HTTP_REFERER'))
 
+
 @login_required(login_url="/login")
 def cart_detail(request):
     print(Cart(request).cart, 'views')
     return render(request, 'mainsite/about.html')
-
