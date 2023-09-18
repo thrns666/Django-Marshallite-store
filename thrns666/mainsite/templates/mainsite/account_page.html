@@ -1,3 +1,23 @@
 {% extends 'mainsite/base.html' %}
 
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <ul>
+                <li>PHOTO HERE</li>
+                <li>{{ user.username }}</li>
+                <li>{{ user.first_name }}{{ user.last_name }}</li>
+                <li><a href="#">Доставка</a></li>
+                <li><a href="#">Мои заказы</a></li>
+                <li><a href="#">Мои данные</a></li>
+                <li><a href="{% url 'password_reset' %}">Сменить пароль</a> </li>
+                <li><a href='{% url 'logout' %}'>Выйти </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
 

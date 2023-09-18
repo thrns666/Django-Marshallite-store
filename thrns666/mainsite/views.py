@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.decorators import login_required
@@ -67,21 +68,21 @@ class ProductPage(DataMixin, DetailView):
         context = {**context, **c_def}
         return context
 
-class UserProfile(ListView, DataMixin):
-    model = '!!!WARN!!!'
+
+class UserProfile(DataMixin, DetailView):
+    model = User
     template_name = 'mainsite/account_page.html'
+    context_object_name = 'user'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(User, id=self.request.user.id)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        l_cats_category_slug_obj = LastCategories.objects.get(slug=self.kwargs['category_slug'])
-        c_def = self.get_user_context(title=l_cats_category_slug_obj.name, selected_cat=l_cats_category_slug_obj, m_cats=m_cats, s_cats=s_cats, l_cats=l_cats)
+        c_def = self.get_user_context()
+        print(context)
         context = {**context, **c_def}
         return context
-
-    def get_queryset(self):
-        return Product.objects.filter(cat_id__slug=self.kwargs['category_slug']) # !!!WARN!!!
-
 
 
 

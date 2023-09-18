@@ -11,6 +11,7 @@ urlpatterns = [
     path('catalog/<slug:category_slug>/', cache_page(60)(CatalogProducts.as_view()), name='catalog'),
     path('product/<slug:product_slug>/', cache_page(15)(ProductPage.as_view()), name='product'),
     path('login/', LogInUser.as_view(), name='login'),
+    path('user/profile/', UserProfile.as_view(), name='profile_cabinet'),
     path('change-password/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('user-logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', RegisterUser.as_view(), name='register'),
