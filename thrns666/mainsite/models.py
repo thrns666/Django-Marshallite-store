@@ -87,3 +87,14 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product', kwargs={'product_slug': self.slug})
+
+
+class UserCart(models.Model):
+
+    product_id = models.ForeignKey('Product', on_delete=models.PROTECT)
+    quantity = models.IntegerField(default=1)
+
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
+        ordering = ['quantity']

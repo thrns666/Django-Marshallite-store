@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .utils import DataMixin
 from cart.cart import Cart
+from models import Product, UserCart
 
 
 # Create your views here.
