@@ -1,14 +1,14 @@
 from django.contrib.auth.forms import PasswordResetForm
-from django.contrib.auth.models import User
+
 from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.contrib.auth.decorators import login_required
+
 from .forms import *
 from .utils import DataMixin
-from cart.cart import Cart
-from models import Product, UserCart
+
+from .models import Product
 
 
 # Create your views here.
@@ -71,7 +71,6 @@ class ProductPage(DataMixin, DetailView):
 
 
 class UserProfile(DataMixin, DetailView):
-    model = User
     template_name = 'mainsite/account_page.html'
     context_object_name = 'user'
 
@@ -122,7 +121,6 @@ class LogInUser(DataMixin, LoginView):
 
 
 class LogoutUser(DataMixin, LogoutView):
-
     def get_user_context_data(self, *, objects_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context()
@@ -138,50 +136,3 @@ class RegisterUser(DataMixin, CreateView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context()
         return {**context, **c_def}
-
-
-@login_required(login_url="/login")
-def cart_add(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.add(product=product)
-    print(request.session.items())
-    print(request.META)
-    return redirect(request.META.get('HTTP_REFERER'))
-
-
-@login_required(login_url="/login")
-def item_clear(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.remove(product)
-    return redirect(request.META.get('HTTP_REFERER'))
-
-
-@login_required(login_url="/login")
-def item_increment(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.add(product=product)
-    return redirect(request.META.get('HTTP_REFERER'))
-
-
-@login_required(login_url="/login")
-def item_decrement(request, id):
-    cart = Cart(request)
-    product = Product.objects.get(id=id)
-    cart.decrement(product=product)
-    return redirect(request.META.get('HTTP_REFERER'))
-
-
-@login_required(login_url="/login")
-def cart_clear(request):
-    cart = Cart(request)
-    cart.clear()
-    return redirect(request.META.get('HTTP_REFERER'))
-
-
-@login_required(login_url="/login")
-def cart_detail(request):
-    print(Cart(request).cart, 'views')
-    return render(request, 'mainsite/about.html')
