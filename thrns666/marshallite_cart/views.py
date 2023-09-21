@@ -1,33 +1,39 @@
 from django.shortcuts import render, redirect, get_object_or_404
-# from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+
 from mainsite.models import Product
 from .cart import Cart
-from .forms import CartAddProductForm
+# from .forms import CartAddProductForm
 
 @login_required(login_url="/login")
 def cart_add(request, product_id):
     cart = Cart(request)
-    product = get_object_or_404(Product, id=id)
-    form = CartAddProductForm(require_POST)
+    product = Product.objects.get(id=product_id)
+    cart.add(product=product)
+    return redirect(request.META.get('HTTP_REFERER'))
 
-    if form.is_valid():
-        cd = form.cleaned_data
-        cart.add(
-            product=product,
-            quantity=cd['quantity'],
-            action=cd['update']
-        )
+@login_required(login_url="/users/login")
+def item_increment(request, product_id):
+    cart = Cart(request)
+    product = Product.objects.get(id=product_id)
+    cart.add(product=product)
+    return redirect("cart_detail")
 
-    return redirect('marshallite_cart:cart_detail')
-    # return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required(login_url="/users/login")
+def item_decrement(request, id):
+    cart = Cart(request)
+    product = Product.objects.get(id=id)
+    cart.decrement(product=product)
+    return redirect("cart_detail")
 
 @login_required(login_url='/login')
-def cart_remove(request, product_id):
+def item_clear(request, id):
     cart = Cart(request)
-    product = get_object_or_404(Product, id=product_id)
+    product = get_object_or_404(Product, id=id)
     cart.remove(product)
-    return redirect('marshallite_cart:cart_detail')
+    return redirect('cart_detail')
 
 def cart_detail(request):
     cart = Cart(request)

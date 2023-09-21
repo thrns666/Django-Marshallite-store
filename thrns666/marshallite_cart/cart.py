@@ -16,7 +16,7 @@ class Cart(object):
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, product, quantity=1, action=False):
+    def add(self, product):
         # Add a product to the cart or update its quantity.
         product_id = product.id
 
@@ -30,11 +30,8 @@ class Cart(object):
                 'image': product.photo.url,
                 'total_price': round(float(product.price.split()[0]), 2)
             }
-
-        if action:
-            self.cart[product_id]['quantity'] = quantity
         else:
-            self.cart[product_id]['quantity'] += quantity
+            self.cart[product_id]['quantity'] += 1
 
         self.save()
 

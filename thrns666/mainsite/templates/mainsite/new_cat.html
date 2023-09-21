@@ -68,7 +68,7 @@
         <div class="col-md-2">
             <div class="product-card">
                 <div class="product-thumb">
-                {% if i.photo %}<!--<tr><th>{{ i }}</th><th>{{ a }}</th><th>5</th></tr>-->
+                {% if i.photo %}
                     <img href="{{ i.get_absolute_url }}" src="{{i.photo.url}}">
                 {% endif %}
                 </div>
@@ -80,7 +80,7 @@
                             <small>27.88 руб.</small> {{i.price}}
                         </div>
                         <div class="product-links">
-                            <a href="{% url 'cart_add' id=i.id %}"><i class="fa-solid fa-basket-shopping"></i></a>
+                            <a href="{% url 'cart_add' product_id = i.id %}"><i class="fa-solid fa-basket-shopping"></i></a>
                             <a href="#"><i class="fa-regular fa-heart"></i></a>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
 from .forms import *
+from marshallite_cart.forms import *
 from .utils import DataMixin
 
 from .models import Product

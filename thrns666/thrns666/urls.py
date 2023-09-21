@@ -25,7 +25,8 @@ from thrns666 import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('mainsite.urls')),
+    path('cart/', include('marshallite_cart.urls')),
+    path('', include('mainsite.urls'))
 ]
 
 if settings.DEBUG:
