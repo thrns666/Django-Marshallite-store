@@ -8,7 +8,7 @@ urlpatterns = [
     path('cart/', include('marshallite_cart.urls')),
     path('', cache_page(5)(HomePage.as_view()), name='homepage'),
     path('about/', about, name='about'),
-    path('catalog/<slug:category_slug>/', cache_page(60)(CatalogProducts.as_view()), name='catalog'),
+    path('catalog/<slug:category_slug>/', cache_page(5)(CatalogProducts.as_view()), name='catalog'),
     path('product/<slug:product_slug>/', cache_page(15)(ProductPage.as_view()), name='product'),
     path('login/', LogInUser.as_view(), name='login'),
     path('user/profile/', UserProfile.as_view(), name='profile_cabinet'),

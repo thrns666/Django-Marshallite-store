@@ -23,15 +23,15 @@ class Cart(object):
         if str(product_id) not in self.cart.keys():
             self.cart[product_id] = {
                 'userid': self.request.user.id,
-                'product_id': id,
+                'product_id': product_id,
                 'name': product.title,
                 'quantity': 1,
                 'price': product.price.split()[0],
                 'image': product.photo.url,
                 'total_price': round(float(product.price.split()[0]), 2)
             }
-        else:
-            self.cart[product_id]['quantity'] += 1
+        # else:
+        #     self.cart[product_id]['quantity'] += 1
 
         self.save()
 

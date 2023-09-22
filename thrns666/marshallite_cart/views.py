@@ -10,6 +10,7 @@ from .cart import Cart
 def cart_add(request, product_id):
     cart = Cart(request)
     product = Product.objects.get(id=product_id)
+    print(product)
     cart.add(product=product)
     return redirect(request.META.get('HTTP_REFERER'))
 
