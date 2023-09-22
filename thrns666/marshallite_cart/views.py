@@ -19,22 +19,22 @@ def item_increment(request, product_id):
     cart = Cart(request)
     product = Product.objects.get(id=product_id)
     cart.add(product=product)
-    return redirect("cart_detail")
-
+    # return redirect("cart_detail")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url="/users/login")
-def item_decrement(request, id):
+def item_decrement(request, product_id):
     cart = Cart(request)
-    product = Product.objects.get(id=id)
+    product = Product.objects.get(id=product_id)
     cart.decrement(product=product)
-    return redirect("cart_detail")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/login')
-def item_clear(request, id):
+def item_clear(request, product_id):
     cart = Cart(request)
-    product = get_object_or_404(Product, id=id)
+    product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
-    return redirect('cart_detail')
+    return redirect(request.META.get('HTTP_REFERER'))
 
 def cart_detail(request):
     cart = Cart(request)

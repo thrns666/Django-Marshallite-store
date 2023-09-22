@@ -30,8 +30,13 @@ class Cart(object):
                 'image': product.photo.url,
                 'total_price': round(float(product.price.split()[0]), 2)
             }
-        # else:
-        #     self.cart[product_id]['quantity'] += 1
+        else:
+            for key, value in self.cart.items():
+                if key == str(product.id):
+                    value['quantity'] = value['quantity'] + 1
+                    value['total_price'] = value['quantity'] * float(value['price'].split()[0])
+                    self.save()
+                    break
 
         self.save()
 

@@ -69,8 +69,8 @@
                           {% if k != 'glob_price' %}
                           <td><img src="{{ v.image }}" alt="{{ v.name }}"></td>
                             <td><a href="#">{{ v.name }}</a></td>
-                          <td><a href="{% url 'item_decrement' id=v.product_id %}">-</a><a class="border">{{ v.quantity }}шт.</a><a href="{% url 'item_increment' id=v.product_id %}">+</a></td>
-                            <td><a class="close" href="{% url 'item_clear' id=v.product_id %}">&#10005;</a></td>
+                          <td><a href="{% url 'item_decrement' product_id=v.product_id %}">-</a><a class="border">{{ v.quantity }}шт.</a><a href="{% url 'item_increment' product_id=v.product_id %}">+</a></td>
+                            <td><a class="close" href="{% url 'item_clear' product_id=v.product_id %}">&#10005;</a></td>
                             <td>{{ v.price }} руб.</td>
                             {% if v.quantity > 1%}
                             <td>Итого: {{ v.total_price }} руб.</td>
@@ -88,7 +88,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                    <button type="button" class="btn btn-primary">Оформить заказа</button>
+                    <button type="button" class="btn btn-primary"><a href="{% url 'cart_detail' %}">Оформить заказа</a></button>
                   </div>
                 </div>
               </div>
