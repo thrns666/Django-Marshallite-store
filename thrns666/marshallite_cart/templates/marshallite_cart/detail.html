@@ -2,6 +2,28 @@
 {% load cart_tags %}
 
 {% block content %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Наименование товара</th>
+      <th scope="col">Количество</th>
+      <th scope="col">Цена</th>
+      <th scope="col">Итоговая стоимость</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in cart %}
+    <tr>
+      <th scope="row"></th>
+      <td><img src="{{ i.image }}"> {{i.name}}</td>
+      <td>{{i.quantity}}</td>
+      <td>{{i.price}} руб.</td>
+      <td>{{i.total_price}} руб.</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
 {% for i in cart %}
 <p>{{i}}</p>
 {% endfor %}
