@@ -24,7 +24,7 @@
   {% endfor %}
   </tbody>
 </table>
-{% for i in cart %}
-<p>{{i}}</p>
-{% endfor %}
+<form action="{% url 'cart_detail' %}">
+  <input type="submit" value="Ввести данные" class="btn btn-primary">
+</form>
 {% endblock content %}

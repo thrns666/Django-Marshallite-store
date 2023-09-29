@@ -13,7 +13,6 @@
                             <li>
                             <details open>
                                 <summary>{{ main.name }}</summary>
-
                                     {% for sub in s_cats %}
                                         {% if sub.main_cat_id == main.pk%}
                                             <ul>
@@ -22,7 +21,6 @@
                                                       <details open>
                                                           <summary>{{ sub.name }}</summary>
                                                         {% if main.pk == sub.main_cat_id %}
-
                                                           {% for last in l_cats %}
                                                             {% if last.sub_cat_id == sub.pk %}
                                                             <ul>
@@ -39,7 +37,6 @@
                                                       <details>
                                                           <summary>{{ sub.name }}</summary>
                                                         {% if main.pk == sub.main_cat_id %}
-
                                                           {% for last in l_cats %}
                                                             {% if last.sub_cat_id == sub.pk %}
                                                             <ul>
@@ -48,7 +45,6 @@
                                                             {% endif %}
                                                           {% endfor %}
                                                         {% endif %}
-
                                                     {% endif %}
                                                       </details>
                                                 </li>

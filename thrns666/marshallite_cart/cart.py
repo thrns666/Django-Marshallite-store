@@ -1,8 +1,4 @@
-from decimal import Decimal
 from django.conf import settings
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
-from mainsite.models import Product
 
 
 class Cart(object):
@@ -15,6 +11,7 @@ class Cart(object):
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+        print(self.request, 'CART PY')
 
     def add(self, product):
         # Add a product to the cart or update its quantity.
@@ -34,7 +31,7 @@ class Cart(object):
             for key, value in self.cart.items():
                 if key == str(product.id):
                     value['quantity'] = value['quantity'] + 1
-                    value['total_price'] = value['quantity'] * float(value['price'].split()[0])
+                    value['total_price'] = round(value['quantity'] * float(value['price'].split()[0]), 2)
                     self.save()
                     break
 
@@ -53,13 +50,22 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
 
-    def __iter__(self):
-        for item in self.cart:
-            print(item, 'CART PY')
-            yield item
+    def decrement(self, product):
+        product_id = str(product.id)
+        if product_id in self.cart:
+            if self.cart[product_id]['quantity'] == 1:
+                self.remove(product=product)
+            else:
+                self.cart[product_id]['quantity'] -= 1
+            self.save()
+
 
     def __len__(self):
-        return sum(item['quantity'] for item in self.cart.values())
+        return len(self.cart.values())
+
+    def __iter__(self):
+        for i in self.cart.values():
+            yield i
 
     def clear(self):
         # empty cart

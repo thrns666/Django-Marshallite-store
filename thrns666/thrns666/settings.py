@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'mainsite.apps.MainsiteConfig',
-    'marshallite_cart'
+    'marshallite_cart',
+    'orders'
 ]
 
 MIDDLEWARE = [
