@@ -16,7 +16,7 @@
   {% for i in cart %}
     <tr>
       <th scope="row"></th>
-      <td><img src="{{ i.image }}"> {{i.name}}</td>
+      <td><img class="cart-detail-img" src="{{ i.image }}"> {{i.name}}</td>
       <td>{{i.quantity}}</td>
       <td>{{i.price}} руб.</td>
       <td>{{i.total_price}} руб.</td>

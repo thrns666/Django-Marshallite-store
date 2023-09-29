@@ -54,24 +54,12 @@ class Cart(object):
             self.save()
 
     def __iter__(self):
-
-        product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
-
-        for product in products:
-            self.cart[str(product.id)]['product'] = product
-
-        for item in self.cart.values():
-            item['price'] = Decimal(item['price'])
-            item['total_price'] = item['price'] * item['quantity']
+        for item in self.cart:
+            print(item, 'CART PY')
             yield item
 
     def __len__(self):
         return sum(item['quantity'] for item in self.cart.values())
-
-    def get_total_price(self):
-        # total bill
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
     def clear(self):
         # empty cart

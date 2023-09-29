@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+# from PIL import Image
 
 
 # Create your models here.
@@ -76,9 +77,6 @@ class Product(models.Model):
     availability = models.BooleanField(default=True, verbose_name='Наличие')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     cat = models.ForeignKey('LastCategories', on_delete=models.PROTECT, verbose_name='Категория')
-
-    def __str__(self):
-        return self.title
 
     class Meta:
         verbose_name = 'Продукция'

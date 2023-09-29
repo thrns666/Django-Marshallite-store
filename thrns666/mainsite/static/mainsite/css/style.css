@@ -627,3 +627,11 @@ body {
 .btn .a {
     color: #fffdff;
 }
+
+/* images in cart */
+
+.cart-detail-img {
+width: 80px;
+}
+
+/* end cart img */
