@@ -23,8 +23,11 @@
     </tr>
   {% endfor %}
   </tbody>
+  <tfoot>
+  <h3>Итоговая стоимость: {{ cart_total_bill }}руб.</h3>
+  </tfoot>
 </table>
-<form action="{% url 'cart_detail' %}">
-  <input type="submit" value="Ввести данные" class="btn btn-primary">
+<form action="{% url 'order_create' %}">
+  <input type="submit" value="Продолжить оформление" class="btn btn-primary">
 </form>
 {% endblock content %}

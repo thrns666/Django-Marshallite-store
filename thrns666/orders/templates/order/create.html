@@ -1,0 +1,18 @@
+{% extends 'mainsite/base.html' %}
+
+{% block content %}
+<h3>Ваш заказ:</h3>
+<ul>
+    {% for item in cart %}
+    <li>{{ item.quantity }} * {{ item.price }}
+        <span>{{ item.total_price }} руб.</span>
+    </li>
+    {% endfor %}
+</ul>
+<p> {{ cart_total_bill }} руб.</p>
+<form method="post">
+    {{ form.as_p }}
+    <input type="submit" value="Подтвердить заказ">
+    {% csrf_token %}
+</form>
+{% endblock content %}
