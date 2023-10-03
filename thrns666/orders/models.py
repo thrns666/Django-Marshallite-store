@@ -4,7 +4,8 @@ from mainsite.models import Product
 # Create your models here.
 class Order(models.Model):
     first_name = models.CharField(max_length=30)
-    phone = models.CharField(max_length=13)
+    phone = models.CharField(max_length=17)
+    email = models.EmailField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)

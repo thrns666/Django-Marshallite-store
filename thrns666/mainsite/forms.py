@@ -49,7 +49,7 @@ class AddProductForm(forms.ModelForm):
         if len(price.split()) == 2:
             if 'руб.' in price:
                 for i in price.split()[0]:
-                    if i in ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ',']:
+                    if i.isdigit or i == ',':
                         continue
                     else:
                         raise ValidationError('Неверно введено число стоимости')
@@ -57,7 +57,3 @@ class AddProductForm(forms.ModelForm):
                 raise ValidationError('Цена указана неверно')
         else:
             raise ValidationError('Возможно вы не поставили пробел между стоимостью и "руб."')
-
-
-
-

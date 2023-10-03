@@ -60,37 +60,37 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
+                    {% if request.session.cart.items %}
                     <table class="table">
                       <tbody>
-
-<!--                      item start-->
                         {% for k, v in request.session.cart.items %}
                         <tr>
-                          {% if k != 'glob_price' %}
                           <td><img src="{{ v.image }}" alt="{{ v.name }}"></td>
                             <td><a href="#">{{ v.name }}</a></td>
                           <td><a href="{% url 'item_decrement' product_id=v.product_id %}">-</a><a class="border">{{ v.quantity }}шт.</a><a href="{% url 'item_increment' product_id=v.product_id %}">+</a></td>
                             <td><a class="close" href="{% url 'item_clear' product_id=v.product_id %}">&#10005;</a></td>
                             <td>{{ v.price }} руб.</td>
-                            {% if v.quantity > 1%}
+                            {% if v.quantity > 1 %}
                             <td>Итого: {{ v.total_price }} руб.</td>
                             {% endif %}
-                          {% endif %}
                         </tr>
                         {% endfor %}
-<!--                      item end-->
                         <tr>
                           <td> Итоговая стоимость: {{ cart_total_bill }} руб.</td>
                         </tr>
                       </tbody>
                     </table>
-
+                    {% else %}
+                      <p>Ваша корзина пуста. Перейти в <a href="{% url 'catalog' category_slug='index' %}">каталог</a>.</p>
+                    {% endif %}
                   </div>
                   <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                      {% if request.session.cart.items %}
                       <form action="{% url 'cart_detail' %}">
                           <input type="submit" value="Оформить заказа" class="btn btn-primary">
                       </form>
+                      {% endif %}
                   </div>
                 </div>
               </div>
