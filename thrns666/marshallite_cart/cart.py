@@ -1,5 +1,7 @@
 from django.conf import settings
 
+from mainsite.models import Product
+
 
 class Cart(object):
 
@@ -64,6 +66,11 @@ class Cart(object):
         return len(self.cart.values())
 
     def __iter__(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        for product in products:
+            self.cart[str(product.id)]['product'] = product
+
         for i in self.cart.values():
             yield i
 

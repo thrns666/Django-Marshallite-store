@@ -1,4 +1,6 @@
 from django.shortcuts import render
+
+from mainsite.models import Product
 from .models import OrderItem
 from .forms import OrderCreateForm
 from marshallite_cart.cart import Cart
@@ -12,6 +14,8 @@ def order_create(request):
         if form.is_valid():
             order = form.save()
             for item in cart:
+                print(item)
+                print(order)
                 OrderItem.objects.create(
                     order=order,
                     product=item['product'],
@@ -21,5 +25,5 @@ def order_create(request):
             cart.clear()
             return render(request, 'order/created.html', {'order': order})
     else:
-        form = OrderCreateForm
-    return render(request, 'order/create.html', {'from': form, 'cart': cart})
+        form = OrderCreateForm()
+    return render(request, 'order/create.html', {'form': form, 'cart': cart})
