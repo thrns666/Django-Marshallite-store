@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'mainsite.apps.MainsiteConfig',
     'marshallite_cart',
-    'orders'
+    'orders',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -112,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 

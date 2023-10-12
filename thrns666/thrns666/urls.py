@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/', include('marshallite_cart.urls')),
     path('order/', include('orders.urls')),
+    path('api/v1/', include('drf_api.urls')),
     path('', include('mainsite.urls'))
 ]
 
