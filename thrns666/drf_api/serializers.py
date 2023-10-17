@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.renderers import JSONRenderer
+
 from mainsite.models import Product
 from orders.models import Order
 
@@ -11,7 +13,7 @@ class MarshalliteSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    first_name = serializers.CharField(max_length=256)
+    first_name = serializers.CharField()
     phone = serializers.CharField(max_length=17)
     created = serializers.DateTimeField(read_only=True)
     paid = serializers.BooleanField(default=False)

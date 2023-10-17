@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from drf_api.serializers import MarshalliteSerializer, OrderSerializer
@@ -33,10 +33,12 @@ class UserAPIView(APIView):
         try:
             instance = Order.objects.get(pk=pk)
         except:
-            return Response({'error': 'Model with defined pk not allowed.'})
+            return Response({'error': 'Model with defined id not allowed.'})
 
-        serializer = OrderSerializer(data=request.data, instance=instance)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        serializer = OrderSerializer(data=request.data, instance=instance, partial=True)
 
-        return Response({'order': serializer.data})
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'edited': OrderSerializer(instance).data})
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

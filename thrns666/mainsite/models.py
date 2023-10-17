@@ -89,6 +89,7 @@ class Product(models.Model):
         return reverse('product', kwargs={'product_slug': self.slug})
 
 
+# Stash this
 class UserCart(models.Model):
 
     product_id = models.ForeignKey('Product', on_delete=models.PROTECT)
