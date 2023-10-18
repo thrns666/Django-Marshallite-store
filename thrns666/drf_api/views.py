@@ -12,6 +12,22 @@ class MarshalliteAPIView(generics.ListAPIView):
     serializer_class = MarshalliteSerializer
 
 
+class OrderAPIList(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class OrderAPIUpdate(generics.UpdateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class OrderAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+
 class UserAPIView(APIView):
     def get(self, request):
         order_list = Order.objects.all()
@@ -43,7 +59,7 @@ class UserAPIView(APIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, *args, **kwargs):
         pk = kwargs.get('pk', None)
 
         if not pk:
