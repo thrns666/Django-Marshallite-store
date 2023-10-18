@@ -18,11 +18,11 @@ class UserAPIView(APIView):
         return Response({'name': OrderSerializer(order_list, many=True).data})
 
     def post(self, request):
-        order_sr = OrderSerializer(data=request.data)
-        order_sr.is_valid(raise_exception=True)
-        order_sr.save()
+        serializer = OrderSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
 
-        return Response({'order': order_sr.data})
+        return Response({'order': serializer.data})
 
     def put(self, request, *args, **kwargs):
         pk = kwargs.get('pk', None)
@@ -33,7 +33,7 @@ class UserAPIView(APIView):
         try:
             instance = Order.objects.get(pk=pk)
         except:
-            return Response({'error': 'Model with defined id not allowed.'})
+            return Response({'error': 'Model with defined pk not allowed.'})
 
         serializer = OrderSerializer(data=request.data, instance=instance, partial=True)
 
@@ -42,3 +42,17 @@ class UserAPIView(APIView):
             return Response({'edited': OrderSerializer(instance).data})
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, *args, **kwargs):
+        pk = kwargs.get('pk', None)
+
+        if not pk:
+            return Response({'error': 'Expected pk, pk not define in request.'})
+
+        try:
+            order = Order.objects.get(pk=pk)
+            order.delete()
+        except Order.DoesNotExist:
+            Response(status=status.HTTP_404_NOT_FOUND)
+
+        return Response({'deleted': f'order {pk} was deleted'}, status=status.HTTP_204_NO_CONTENT)
