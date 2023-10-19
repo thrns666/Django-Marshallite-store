@@ -1,74 +1,34 @@
-from django.shortcuts import render
 from rest_framework import generics, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import viewsets
 from drf_api.serializers import MarshalliteSerializer, OrderSerializer
-from mainsite.models import Product
+from mainsite.models import Product, SubCategories
 from orders.models import Order
 
 
-class MarshalliteAPIView(generics.ListAPIView):
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = MarshalliteSerializer
 
+    @action(methods=['get'], detail=False, url_path='categories/(?P<cat_id>[^/.]+)')
+    def categories(self, request, cat_id):
+        # print(self.kwargs)
+        # cat_id = self.kwargs.get('cat_id', None)
+        cat = cat_id
 
-class OrderAPIList(generics.ListCreateAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-
-
-class OrderAPIUpdate(generics.UpdateAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-
-
-class OrderAPIDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
-
-
-
-class UserAPIView(APIView):
-    def get(self, request):
-        order_list = Order.objects.all()
-        return Response({'name': OrderSerializer(order_list, many=True).data})
-
-    def post(self, request):
-        serializer = OrderSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({'order': serializer.data})
-
-    def put(self, request, *args, **kwargs):
-        pk = kwargs.get('pk', None)
-
-        if not pk:
-            return Response({'error': 'Expected pk, pk not define in request.'})
+        if not cat:
+            Response({'error': 'wrong cat id'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            instance = Order.objects.get(pk=pk)
+            prod_list = Product.objects.filter(cat_id=cat)
+            cat_name = SubCategories.objects.get(id=cat).title
         except:
-            return Response({'error': 'Model with defined pk not allowed.'})
+            return Response({'error': 'wrong category id'}, status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = OrderSerializer(data=request.data, instance=instance, partial=True)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'edited': OrderSerializer(instance).data})
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, *args, **kwargs):
-        pk = kwargs.get('pk', None)
-
-        if not pk:
-            return Response({'error': 'Expected pk, pk not define in request.'})
-
-        try:
-            order = Order.objects.get(pk=pk)
-            order.delete()
-        except Order.DoesNotExist:
-            Response(status=status.HTTP_404_NOT_FOUND)
-
-        return Response({'deleted': f'order {pk} was deleted'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'products': {cat_name: prod_list}})

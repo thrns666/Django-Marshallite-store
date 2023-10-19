@@ -86,19 +86,6 @@ class UserProfile(DataMixin, DetailView):
         return context
 
 
-
-def about(request):
-    # if request.method == 'POST':
-    #     form = AddProductForm(request.POST, request.FILES)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('homepage')
-    # else:
-    #     form = AddProductForm()
-
-    return render(request, 'mainsite/about.html', {'title': 'О данном сайте'})
-
-
 class PasswordResetUser(DataMixin, PasswordResetView):
     form_class = PasswordResetForm
     template_name = 'mainsite/password_reset.html'

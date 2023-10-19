@@ -1,8 +1,16 @@
-from django.urls import path
+from django.urls import path, include
 from drf_api.views import *
+from rest_framework import routers
+
+order_router = routers.SimpleRouter()
+order_router.register(r'orders', OrderViewSet)
+
+product_router = routers.SimpleRouter()
+product_router.register('products', ProductViewSet)
+
+print(product_router.urls)
 
 urlpatterns = [
-    path('v1/product-list/', MarshalliteAPIView.as_view(), name='api_list'),
-    path('v1/orders/', OrderAPIList.as_view(), name='test'),
-    path('v1/orders/<int:pk>/', OrderAPIDetailView.as_view(), name='put_test')
+    path('v1/', include(product_router.urls)),
+    path('v1/', include(order_router.urls))
 ]
