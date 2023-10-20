@@ -1,6 +1,4 @@
 from rest_framework import serializers
-from rest_framework.renderers import JSONRenderer
-
 from mainsite.models import Product
 from orders.models import Order
 

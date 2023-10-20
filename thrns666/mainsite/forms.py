@@ -7,11 +7,11 @@ from django.core.exceptions import ValidationError
 
 
 class LoginUserForm(AuthenticationForm):
-    email = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'}))
+    username = forms.EmailField(label='Почта', widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Почта'}))
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
 
     class Meta:
-        fields = ('email', 'password')
+        fields = ('username', 'password')
 
 
 class RegisterUserForm(UserCreationForm):
