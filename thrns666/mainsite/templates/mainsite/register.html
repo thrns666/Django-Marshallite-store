@@ -183,13 +183,16 @@
             <form method="post" class="form-horizontal">
                 {% csrf_token %}
                 <div class="form-group">
-                    <p>{{form.username}}</p>
+                    <p>{{form.email}}</p>
                 </div>
                 <div class="form-group">
                     <p>{{form.first_name}}</p>
                 </div>
                 <div class="form-group">
                     <p>{{form.last_name}}</p>
+                </div>
+                <div class="form-group">
+                    <p>{{form.username}}</p>
                 </div>
                 <div class="form-group">
                     <p>{{form.password1}}</p>

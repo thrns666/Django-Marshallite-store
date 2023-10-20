@@ -5,7 +5,7 @@ from mainsite.models import Product
 from orders.models import Order
 
 
-class MarshalliteSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('title', 'price', 'availability', 'price', 'cat')
