@@ -9,10 +9,9 @@
     </li>
     {% endfor %}
 </ul>
-<p> {{ cart_total_bill }} руб.</p>
+<p> {{ cart_total_amount }} руб.</p>
 <form method="post">
-    {{ form.as_p }}
-    <input type="submit" value="Перейти к оплате">
+    <input type="submit" value="Подтвердить заказ">
     {% csrf_token %}
 </form>
 {% endblock content %}
