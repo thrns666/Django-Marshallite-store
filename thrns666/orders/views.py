@@ -11,7 +11,7 @@ from marshallite_cart.cart import Cart
 
 def order_create(request):
     if not request.user.id:
-        return HttpResponse('Unauthorized', status=401)
+        return HttpResponse('Unauthorized', status=403)
 
     cart = Cart(request)
     print(request.user.id)
@@ -19,7 +19,7 @@ def order_create(request):
     if request.method == 'POST':
         order = Order.objects.create(
             user_id=request.user.id,
-            order_sum=cart_total_amount(request).get('cart_total_bill')
+            order_sum=cart_total_amount(request).get('cart_total_amount')
         )
 
         for item in cart:
