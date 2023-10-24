@@ -5,6 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
+from orders.models import Order
 from .forms import *
 from marshallite_cart.forms import *
 from .utils import DataMixin
@@ -80,7 +81,8 @@ class UserProfile(DataMixin, DetailView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context()
+
+        c_def = self.get_user_context(user_orders=Order.objects.filter(user_id=self.request.user.id))
         print(context)
         context = {**context, **c_def}
         return context

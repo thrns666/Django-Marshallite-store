@@ -10,7 +10,9 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = Order
-        fields = ['pk', 'user_id', 'order_sum', 'created']
+        fields = ['pk', 'user', 'order_sum', 'created']
 
