@@ -1,19 +1,23 @@
+from django.db.models import QuerySet
 from rest_framework import generics, status, mixins
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.viewsets import GenericViewSet
 
+from drf_api.mixins import APIListMixin
+from drf_api.permissions import IsAdminOrReadOnly, IsOwnerOrNothing
 from drf_api.serializers import ProductSerializer, OrderSerializer
 from mainsite.models import Product, SubCategories
 from orders.models import Order
 
 
-class OrderAPIList(generics.ListCreateAPIView):
-    queryset = Order.objects.all()
+class OrderAPIList(APIListMixin, mixins.CreateModelMixin, GenericAPIView):
+    queryset = Order.objects
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsOwnerOrNothing]
 
 
 class OrderAPIUpdate(generics.RetrieveUpdateAPIView):
@@ -24,13 +28,14 @@ class OrderAPIUpdate(generics.RetrieveUpdateAPIView):
 class OrderAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 
 # class OrderViewSet(viewsets.ModelViewSet):
 #     queryset = Order.objects.all()
 #     serializer_class = OrderSerializer
 #
-#     @action(methods=['get'], detail=False, url_path='user/(?P<user_id>[^/.]+)')
+    # @action(methods=['get'], detail=False, url_path='user/(?P<user_id>[^/.]+)')
 #     def order_user_list(self, request, user_id):
 #         print(user_id)
 #         if user_id.isdigit():
