@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'mainsite.apps.MainsiteConfig',
     'marshallite_cart',
-    'orders',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+    'orders'
+
 ]
 
 MIDDLEWARE = [
@@ -159,5 +162,10 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
        'rest_framework.renderers.BrowsableAPIRenderer'    # Comm to off debug
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
     ]
 }
