@@ -35,12 +35,18 @@ from orders.models import Order
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAdminUser]
     authentication_classes = [TokenAuthentication]
 
-    def delete(self, request, *args, **kwargs):
-        if request.user and request.user.is_staff:
-            return self.destroy(request, *args, **kwargs)
+    @action(methods=['get'], url_path='my', detail=False, permission_classes=[IsAuthenticated])
+    def my_orders_list(self, request):
+
+        try:
+            user_list = Order.objects.filter(user_id=request.user.id).values()
+        except:
+            return Response({'error': 'Something with model went wrong'}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'your_orders': user_list})
 
     @action(methods=['get'], detail=False, url_path='user/(?P<user_id>[^/.]+)')
     def order_user_list(self, request, user_id):
@@ -54,7 +60,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             )
 
         try:
-            # if auth and is superuser; if not - permission denied; for auth simple user another method, maybe.
             order_list = Order.objects.filter(user_id=user).values()
         except:
             return Response({'error': 'User id is out of range'}, status=status.HTTP_404_NOT_FOUND)
@@ -62,12 +67,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Response({'user_id': user, 'orders': order_list}, status=status.HTTP_200_OK)
 
 
-class ProductViewSet(mixins.CreateModelMixin,
-                   mixins.RetrieveModelMixin,
-                   mixins.UpdateModelMixin,
-                   mixins.DestroyModelMixin,
-                   mixins.ListModelMixin,
-                   GenericViewSet):
+class ProductViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, GenericViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer()
     permission_classes = [IsAdminOrReadOnly]
