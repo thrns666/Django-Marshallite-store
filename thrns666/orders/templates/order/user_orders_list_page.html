@@ -1,0 +1,15 @@
+{% extends 'mainsite/base.html' %}
+
+{% block content %}
+
+<table class="table">
+    <tbody>
+    {% for i in user_orders %}
+        <tr>
+            <td>{{ i }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

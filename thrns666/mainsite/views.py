@@ -88,6 +88,9 @@ class UserProfile(DataMixin, DetailView):
         return context
 
 
+
+
+
 class PasswordResetUser(DataMixin, PasswordResetView):
     form_class = PasswordResetForm
     template_name = 'mainsite/password_reset.html'

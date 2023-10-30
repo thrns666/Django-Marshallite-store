@@ -1,35 +1,14 @@
-from django.db.models import QuerySet
-from rest_framework import generics, status, mixins
+from rest_framework import status, mixins
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.decorators import action
-from rest_framework.generics import GenericAPIView
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.viewsets import GenericViewSet
-
-from drf_api.mixins import APIListMixin
-from drf_api.permissions import IsAdminOrReadOnly, IsOwnerOrNothing
+from drf_api.permissions import IsAdminOrReadOnly
 from drf_api.serializers import ProductSerializer, OrderSerializer
 from mainsite.models import Product, SubCategories
 from orders.models import Order
-
-
-# class OrderAPIList(APIListMixin, mixins.CreateModelMixin, GenericAPIView):
-#     queryset = Order.objects
-#     serializer_class = OrderSerializer
-#     permission_classes = [IsOwnerOrNothing]
-#
-#
-# class OrderAPIUpdate(generics.RetrieveUpdateAPIView):
-#     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer
-#
-#
-# class OrderAPIDestroy(generics.RetrieveDestroyAPIView):
-#     queryset = Order.objects.all()
-#     serializer_class = OrderSerializer
-#     permission_classes = [IsAdminOrReadOnly]
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -67,7 +46,14 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Response({'user_id': user, 'orders': order_list}, status=status.HTTP_200_OK)
 
 
-class ProductViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, GenericViewSet):
+class ProductViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    GenericViewSet
+):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer()
     permission_classes = [IsAdminOrReadOnly]

@@ -9,9 +9,19 @@ from .forms import OrderCreateForm
 from marshallite_cart.cart import Cart
 
 
+def user_orders_list(request):
+    if not request.user.id:
+        return HttpResponse('Unauthorized', status=401)
+
+    user_orders = Order.objects.filter(user_id=request.user.id)
+
+    return render(request, 'order/create.html', {'user_orders': user_orders})
+
+
+
 def order_create(request):
     if not request.user.id:
-        return HttpResponse('Unauthorized', status=403)
+        return HttpResponse('Unauthorized', status=401)
 
     cart = Cart(request)
     print(request.user.id)

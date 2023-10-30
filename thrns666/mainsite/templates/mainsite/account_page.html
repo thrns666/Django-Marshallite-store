@@ -10,7 +10,7 @@
                 <li>{{ user.username }}</li>
                 <li>{{ user.first_name }}{{ user.last_name }}</li>
                 <li><a href="#">Доставка</a></li>
-                <li><a href="">Мои заказы</a></li>    <!--user_orders queryset obj need cycle, for i in user_orders: etc...-->
+                <li><a href="{% url 'orders_list' %}">Мои заказы</a></li>    <!--user_orders queryset obj need cycle, for i in user_orders: etc...-->
                 <li><a href="#">Мои данные</a></li>
                 <li><a href="{% url 'password_reset' %}">Сменить пароль</a> </li>
                 <li><a href="{% url 'logout' %}">Выйти </a></li>
