@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 from mainsite.models import Product
+from orders.views import order_create
 from .cart import Cart
 # from .forms import CartAddProductForm
 
@@ -38,4 +39,7 @@ def item_clear(request, product_id):
 
 def cart_detail(request):
     cart = Cart(request)
+    if request.method == 'POST':
+        order_create(request)
+
     return render(request, 'marshallite_cart/detail.html', {'cart': cart})

@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Наименование товара</th>
       <th scope="col">Количество</th>
       <th scope="col">Цена</th>
@@ -24,10 +23,12 @@
   {% endfor %}
   </tbody>
   <tfoot>
-  <h3>Итоговая стоимость: {{ cart_total_amount }}руб.</h3>
+
   </tfoot>
 </table>
-<form action="{% url 'order_create' %}">
-  <input type="submit" value="Продолжить оформление" class="btn btn-primary">
+<h5>Итоговая стоимость: <strong>{{ cart_total_amount }} руб.</strong></h5>
+<form method="post">       <!--<form action="{% url 'order_create' %}">-->
+  <input type="submit" value="Оформиь заказ" class="btn btn-primary">
+  {% csrf_token %}
 </form>
 {% endblock content %}
