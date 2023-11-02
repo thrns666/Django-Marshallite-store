@@ -15,7 +15,7 @@ def user_orders_list(request):
 
     user_orders = Order.objects.filter(user_id=request.user.id)
 
-    return render(request, 'order/create.html', {'user_orders': user_orders})
+    return render(request, 'order/user_orders_list_page.html', {'user_orders': user_orders})
 
 
 

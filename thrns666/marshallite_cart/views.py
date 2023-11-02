@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 from mainsite.models import Product
+from mainsite.utils import footer_fourth_col, footer_third_col, footer_second_col, footer_first_col
 from orders.views import order_create
 from .cart import Cart
 # from .forms import CartAddProductForm
@@ -42,4 +43,10 @@ def cart_detail(request):
     if request.method == 'POST':
         order_create(request)
 
-    return render(request, 'marshallite_cart/detail.html', {'cart': cart})
+    return render(request, 'marshallite_cart/detail.html', {
+        'cart': cart,
+        'footer_first_col': footer_first_col,
+        'footer_second_col': footer_second_col,
+        'footer_third_col': footer_third_col,
+        'footer_fourth_col': footer_fourth_col
+    })
