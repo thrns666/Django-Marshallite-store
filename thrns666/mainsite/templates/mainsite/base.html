@@ -39,7 +39,7 @@
           <a class="nav-link" href="{% url 'catalog' category_slug='index' %}">Каталог</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Информация</a>
+          <a class="nav-link" href="{% url 'info' %}">Информация</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -192,7 +192,7 @@
 
 {% block footer %}
 
-    <footer>
+    <footer class="mt-auto">
         <section class="footer">
             <div class="container-fluid mb-auto">
                 <div class="row">

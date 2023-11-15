@@ -13,9 +13,10 @@ def user_orders_list(request):
     if not request.user.id:
         return HttpResponse('Unauthorized', status=401)
 
-    user_orders = Order.objects.filter(user_id=request.user.id)
+    user_orders = Order.objects.filter(user=request.user.id).values()
+    print(user_orders)
 
-    return render(request, 'order/create.html', {'user_orders': user_orders})
+    return render(request, 'order/user_orders_list_page.html', {'user_orders': user_orders})
 
 
 

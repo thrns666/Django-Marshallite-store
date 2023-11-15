@@ -2,14 +2,29 @@
 
 {% block content %}
 
-<table class="table">
-    <tbody>
-    {% for i in user_orders %}
-        <tr>
-            <td>{{ i }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
+<table class="table table-striped">
+  <thead>
+    <tr>
+        <th scope="col">Номер заказа</th>
+        <th scope="col">Создан</th>
+        <th scope="col">Оплачен</th>
+        <th scope="col">Итоговая стоимость</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in user_orders %}
+    <tr>
+<!--      <th scope="row"></th>-->
+      <td> {{ i.id }}</td>
+      <td> {{i.created}} </td>
+      <td> {{i.paid}} </td>
+      <td> {{i.order_sum}} руб.</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  <tfoot>
+
+  </tfoot>
 </table>
 
 {% endblock content %}

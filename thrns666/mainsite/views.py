@@ -3,7 +3,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
 
 from orders.models import Order
 from .forms import *
@@ -58,6 +58,17 @@ class CatalogProducts(DataMixin, ListView):
             return ''
 
 
+class InformationPage(DataMixin, TemplateView):
+    template_name = 'mainsite/info.html'
+
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(info='Информация размещенная на данной странице может быть чем угодно')
+        context = {**context, **c_def}
+        return context
+
+
 class ProductPage(DataMixin, DetailView):
     model = Product
     template_name = 'mainsite/product_page.html'
@@ -67,7 +78,6 @@ class ProductPage(DataMixin, DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['product'])
-        print(context)
         context = {**context, **c_def}
         return context
 
@@ -86,9 +96,6 @@ class UserProfile(DataMixin, DetailView):
         print(context)
         context = {**context, **c_def}
         return context
-
-
-
 
 
 class PasswordResetUser(DataMixin, PasswordResetView):
