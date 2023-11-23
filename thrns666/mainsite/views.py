@@ -3,6 +3,7 @@ from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
+from django.db.models import Q
 from orders.models import Order
 from .forms import *
 from .utils import DataMixin
@@ -59,6 +60,23 @@ class InformationPage(DataMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(info='Информация размещенная на данной странице может быть чем угодно')
+        context = {**context, **c_def}
+        return context
+
+
+class SearchPage(DataMixin, ListView):
+    model = Product
+    template_name = 'mainsite/search_page.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        obj_list = Product.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
+        print(obj_list)
+        return obj_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title='Поиск')
         context = {**context, **c_def}
         return context
 

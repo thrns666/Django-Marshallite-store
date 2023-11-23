@@ -1,4 +1,17 @@
 {% extends "mainsite/base.html" %}
 
 {% block content %}
+<p>Search results</p>
+
+{% for i in obj_list %}
+<div class="card" style="width:18rem;">
+    <img src="{{ i.image }}" class="card-img-top" alt="{{ i.title }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ i.title }}</h5>
+        <p class="card-text">{{ i.description }}</p>
+        <a href="#" class="btn btn-primary">link</a>
+    </div>
+</div>
+{% endfor %}
+
 {% endblock content %}
