@@ -1,17 +1,45 @@
 {% extends "mainsite/base.html" %}
 
 {% block content %}
-<p>Search results</p>
+<p>Результаты поиска</p>
 
-{% for i in obj_list %}
-<div class="card" style="width:18rem;">
-    <img src="{{ i.image }}" class="card-img-top" alt="{{ i.title }}">
-    <div class="card-body">
-        <h5 class="card-title">{{ i.title }}</h5>
-        <p class="card-text">{{ i.description }}</p>
-        <a href="#" class="btn btn-primary">link</a>
+    {% for i in object_list %}
+    <div class="container-fluid">
+        <div class="col-md-2">
+            <div class="product-card">
+                <div class="product-thumb">
+                {% if i.photo %}
+                    <img href="{{ i.get_absolute_url }}" src="{{i.photo.url}}">
+                {% endif %}
+                </div>
+                <div class="product-details">
+                    <h4><a href="{{ i.get_absolute_url }}">{{i.title}}</a></h4>
+                    <p>{{i.description|truncatewords:10}}</p>
+                    <div class="product-bottom-details d-flex justify-content-between">
+                        <div class="product-price">
+                            <small>27.88 руб.</small> {{i.price}}
+                        </div>
+                        <div class="product-links">
+                            <a href="{% url 'cart_add' i.id %}"><i class="fa-solid fa-basket-shopping"></i></a>
+                            <a href="#"><i class="fa-regular fa-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-{% endfor %}
+
+
+
+
+<!--        <div class="card" style="width:18rem;">-->
+<!--            <img href="{{ i.get_absolute_url }}" src="{{i.photo.url}}" class="card-img-top" alt="{{ i.title }}">-->
+<!--            <div class="card-body">-->
+<!--                <h5 class="card-title">{{ i.title }}</h5>-->
+<!--                <p class="card-text">{{ i.description }}</p>-->
+<!--                <a href="{{ i.get_absolute_url }}" class="btn btn-primary">Перейти</a>-->
+<!--            </div>-->
+<!--        </div>-->
+    {% endfor %}
 
 {% endblock content %}
