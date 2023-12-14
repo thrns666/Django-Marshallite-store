@@ -70,8 +70,8 @@ class SearchPage(DataMixin, ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q')
+        print(query, 'query')
         obj_list = Product.objects.filter(Q(title__icontains=query) | Q(description__icontains=query))
-        print(obj_list.all())
         return obj_list
 
     def get_context_data(self, **kwargs):
