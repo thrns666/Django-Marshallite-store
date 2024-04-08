@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import LoginView, PasswordResetView, LogoutView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView
 from django.db.models import Q
@@ -39,7 +39,8 @@ class CatalogProducts(DataMixin, ListView):
 
         if self.kwargs['category_slug'] != 'index':
             l_cats_category_slug_obj = LastCategories.objects.get(slug=self.kwargs['category_slug'])
-            c_def = self.get_user_context(title=l_cats_category_slug_obj.name, selected_cat=l_cats_category_slug_obj, m_cats=m_cats, s_cats=s_cats, l_cats=l_cats)
+            c_def = self.get_user_context(title=l_cats_category_slug_obj.name, selected_cat=l_cats_category_slug_obj,
+                                          m_cats=m_cats, s_cats=s_cats, l_cats=l_cats)
             print(c_def['title'])
         else:
             c_def = self.get_user_context(title='Категории товаров', m_cats=m_cats, s_cats=s_cats, l_cats=l_cats)
@@ -93,6 +94,8 @@ class ProductPage(DataMixin, DetailView):
         c_def = self.get_user_context(title=context['product'])
         context = {**context, **c_def}
         return context
+
+
 
 
 class UserProfile(DataMixin, DetailView):
