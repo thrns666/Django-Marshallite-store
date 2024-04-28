@@ -11,7 +11,5 @@ product_router.register('products', ProductViewSet)
 urlpatterns = [
     path('v1/', include(product_router.urls)),
     path('v1/', include(order_router.urls)),
-    # path('v1/orders/', OrderAPIList.as_view()),
-    # path('v1/ordersdestroy/<int:id>/', OrderAPIDestroy.as_view()),
     path('v1/auth/', include('djoser.urls.authtoken'))
 ]

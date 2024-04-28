@@ -1,5 +1,4 @@
 from django.conf import settings
-
 from mainsite.models import Product
 
 
@@ -60,7 +59,6 @@ class Cart(object):
             else:
                 self.cart[product_id]['quantity'] -= 1
             self.save()
-
 
     def __len__(self):
         return len(self.cart.values())

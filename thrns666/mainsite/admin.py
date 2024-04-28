@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-# Register your models here.
 
 class MainsiteAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'price', 'availability', 'cat')
@@ -11,10 +10,12 @@ class MainsiteAdmin(admin.ModelAdmin):
     list_filter = ('cat', 'price', 'availability')
     prepopulated_fields = {'slug': ('title',)}
 
+
 class LastCategoriesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     search_fields = ('name',)
     prepopulated_fields = {'slug': ('name',)}
+
 
 class SubCategoriesAdmin(admin.ModelAdmin):
     list_display = ('name', 'main_cat', 'slug')

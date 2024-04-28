@@ -1,11 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from marshallite_cart.context_processor import cart_total_amount
 from .tasks import order_created
-from mainsite.models import Product
 from .models import OrderItem, Order
-from .forms import OrderCreateForm
 from marshallite_cart.cart import Cart
 
 
@@ -14,10 +11,8 @@ def user_orders_list(request):
         return HttpResponse('Unauthorized', status=401)
 
     user_orders = Order.objects.filter(user=request.user.id).values()
-    print(user_orders)
 
     return render(request, 'order/user_orders_list_page.html', {'user_orders': user_orders})
-
 
 
 def order_create(request):
@@ -25,7 +20,6 @@ def order_create(request):
         return HttpResponse('Unauthorized', status=401)
 
     cart = Cart(request)
-    print(request.user.id)
 
     if request.method == 'POST':
         order = Order.objects.create(
@@ -34,8 +28,6 @@ def order_create(request):
         )
 
         for item in cart:
-            print(item)
-            print(order)
             OrderItem.objects.create(
                 order=order,
                 product=item['product'],

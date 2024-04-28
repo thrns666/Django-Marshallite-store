@@ -1,7 +1,6 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.views.decorators.cache import cache_page
-
 from .views import *
 
 urlpatterns = [

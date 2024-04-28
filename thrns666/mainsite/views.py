@@ -10,7 +10,6 @@ from .utils import DataMixin
 from .models import Product
 
 
-# Create your views here.
 class HomePage(DataMixin, ListView):
     model = Slider
     template_name = 'mainsite/index.html'

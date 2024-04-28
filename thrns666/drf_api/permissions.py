@@ -16,4 +16,3 @@ class IsOwnerOrNothing(permissions.BasePermission):
             return True
 
         return False
-

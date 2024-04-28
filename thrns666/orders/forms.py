@@ -1,6 +1,5 @@
 from django import forms
 from .models import Order
-from django.core.exceptions import ValidationError
 
 
 class OrderCreateForm(forms.ModelForm):

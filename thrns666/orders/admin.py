@@ -5,7 +5,6 @@ import datetime
 from django.http import HttpResponse
 
 
-# Register your models here.
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     raw_id_fields = ['product']
@@ -13,9 +12,9 @@ class OrderItemInline(admin.TabularInline):
 
 def export_to_csv(modeladmin, request, queryset):
     opts = modeladmin.model._meta
-    responce = HttpResponse(content_type='text/csv')
-    responce['Content-Disposition'] = f'attachment; filename = {opts.verbose_name}.csv'
-    writer = csv.writer(responce)
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = f'attachment; filename = {opts.verbose_name}.csv'
+    writer = csv.writer(response)
     fields = [field for field in opts.get_fields() if not field.many_to_many and not field.one_to_many]
     # write header info
     writer.writerow([field.verbose_name for field in fields])
@@ -28,7 +27,8 @@ def export_to_csv(modeladmin, request, queryset):
                 value = value.strftime('%d/%m/%Y')
             data_row.append(value)
         writer.writerow(data_row)
-    return responce
+    return response
+
 
 export_to_csv.short_description = 'Convert to CSV'
 
