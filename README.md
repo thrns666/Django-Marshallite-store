@@ -2,4 +2,4 @@
 Project in hh branch.
 
 "Marshallite" online-store.
-In project used Django, Celery+Reddis, Bootstrap, googleFonts, fontsAwesome, googleIcons, free photoBanks.
+Used Django, Celery+Redis, Bootstrap, googleFonts, fontsAwesome, googleIcons, free photoBanks.
